@@ -1,0 +1,39 @@
+---
+layout: default
+title: Notes
+---
+
+<div class="container" style="padding-top: 56px; padding-bottom: 80px;">
+
+  <div class="notes-header-grid" style="display: grid; grid-template-columns: 1fr 200px; gap: 60px; align-items: start; margin-bottom: 36px;">
+    <div>
+      <div class="eyebrow" style="margin-bottom: 14px;">section · 003</div>
+      <h1 class="h-display" style="font-size: 64px; margin: 0;">
+        <span style="color: var(--accent); font-style: italic; font-family: var(--serif); font-size: 28px; vertical-align: top; margin-right: 8px;">{{ site.notes.size }}</span>
+        Notes
+      </h1>
+      <p style="color: var(--fg-dim); max-width: 520px; margin-top: 14px; font-size: 15px;">
+        A digital garden: half-formed thoughts, research fragments, and observations at various stages of maturity.
+      </p>
+    </div>
+
+    <!-- Growth stage legend -->
+    <div class="notes-legend" style="border: 1px solid var(--rule-soft); border-radius: 6px; padding: 16px 18px; background: var(--bg-elev); font-size: 13px; margin-top: 28px;">
+      <div class="mono" style="font-size: 10px; color: var(--muted-2); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px;">legend</div>
+      <div style="display: grid; gap: 8px;">
+        <div>🌱 <span style="color: var(--fg-dim); font-size: 12px;">seedling</span></div>
+        <div>🌿 <span style="color: var(--fg-dim); font-size: 12px;">budding</span></div>
+        <div>🌳 <span style="color: var(--fg-dim); font-size: 12px;">evergreen</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Masonry note cards -->
+  <div class="notes-grid" style="column-count: 3; column-gap: 16px;">
+    {% assign sorted_notes = site.notes | sort: "updated" | reverse %}
+    {% for note in sorted_notes %}
+      {% include note-card.html note=note %}
+    {% endfor %}
+  </div>
+
+</div>

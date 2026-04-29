@@ -1,0 +1,105 @@
+---
+layout: default
+title: deadsoftie
+---
+
+<!-- Hero -->
+<div class="container" style="padding-top: 56px; padding-bottom: 24px;">
+  <div class="hero-grid" style="display: grid; grid-template-columns: 1fr 320px; gap: 60px; align-items: start;">
+
+    <!-- Left: headline + bio -->
+    <div class="home-hero">
+      <div class="eyebrow" style="margin-bottom: 18px;">research log · est. 2019 · written by hand</div>
+      <h1 class="h-display" style="font-size: 64px; margin: 0 0 24px;">
+        Notes on <em style="color: var(--accent); font-style: italic;">game engine architecture</em>,
+        the craft of <em style="color: var(--accent-2); font-style: italic;">development</em>,
+        and whatever else happens to be on my mind.
+      </h1>
+      <p style="font-size: 16px; color: var(--fg-dim); max-width: 560px; margin: 0; line-height: 1.6;">
+        I'm <span style="color: var(--fg);">Rahul Nair</span> -> a game engine developer and grad student at DigiPen, building a custom C++ engine and making games.
+        This is my public notebook. Technical write-ups, GDC recaps, retro dev workshops, books I'm reading, and the occasional philosophical tangent.
+      </p>
+      <div style="display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap;">
+        {% assign latest_essay = site.essays | sort: "date" | last %}
+        {% if latest_essay %}
+          <a href="{{ latest_essay.url | relative_url }}" class="btn btn-accent">Read latest essay →</a>
+        {% endif %}
+        <a href="{{ '/feed.xml' | relative_url }}" class="btn">Subscribe via RSS</a>
+      </div>
+    </div>
+
+    <!-- Right: /now sidebar -->
+    <aside class="now">
+      <div class="now-status">
+        <span class="dot pulse"></span>
+        live
+      </div>
+      <div class="eyebrow" style="margin-bottom: 14px;">now · {{ site.data.now.last_updated | date: "%b %-d" }}</div>
+      <ul>
+        <li>
+          <span class="now-key">writing</span>
+          <span class="now-val">{{ site.data.now.writing }}</span>
+        </li>
+        <li>
+          <span class="now-key">building</span>
+          <span class="now-val">{{ site.data.now.building }}</span>
+        </li>
+        <li>
+          <span class="now-key">reading</span>
+          <span class="now-val">{{ site.data.now.reading }}</span>
+        </li>
+        <li>
+          <span class="now-key">location</span>
+          <span class="now-val">{{ site.data.now.location }}</span>
+        </li>
+      </ul>
+      <hr class="hr-dashed" style="margin: 16px 0;">
+      <a href="{{ '/now' | relative_url }}" class="now-link">see /now in full →</a>
+    </aside>
+
+  </div>
+
+  <!-- Hero canvas placeholder (JS populates if enabled) -->
+  <div id="hero-canvas" style="margin-top: 40px; height: 140px; border-radius: 6px; background: var(--bg-deep); border: 1px solid var(--rule-soft); display: flex; align-items: center; justify-content: center;">
+    <canvas id="hero-particle-canvas" style="display: block;"></canvas>
+  </div>
+</div>
+
+<!-- Featured essays -->
+{% assign featured = site.essays | where: "featured", true | sort: "date" | reverse %}
+<div class="container" style="padding-top: 60px; padding-bottom: 40px;">
+  <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 22px;">
+    <h2 class="h-serif" style="font-size: 28px; margin: 0;">
+      <span class="section-num">003</span> Featured
+    </h2>
+    <a href="{{ '/essays' | relative_url }}" class="mono" style="font-size: 12px; color: var(--muted);">see all {{ site.essays.size }} essays →</a>
+  </div>
+  <div class="feat-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+    {% assign feat_nums = "I,II,III" | split: "," %}
+    {% for post in featured limit: 3 %}
+      {% assign feat_num = feat_nums[forloop.index0] %}
+      {% include feat-card.html post=post num=feat_num %}
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Recent essays -->
+{% assign recent = site.essays | sort: "date" | reverse %}
+<div class="container" style="padding-top: 40px; padding-bottom: 60px;">
+  <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px;">
+    <h2 class="h-serif" style="font-size: 28px; margin: 0;">
+      <span class="section-num">004</span> Recent
+    </h2>
+    <span class="mono" style="font-size: 11px; color: var(--muted);">5 of {{ site.essays.size }}</span>
+  </div>
+  <div>
+    {% for post in recent limit: 5 %}
+      {% include post-row.html post=post %}
+    {% endfor %}
+  </div>
+  <div style="padding: 20px 0; border-top: 1px solid var(--rule-soft); text-align: center;">
+    <a href="{{ '/essays' | relative_url }}" class="mono" style="font-size: 12px; color: var(--muted);">all {{ site.essays.size }} essays →</a>
+  </div>
+</div>
+
+<script src="{{ '/assets/js/hero.js' | relative_url }}"></script>

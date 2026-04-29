@@ -1,0 +1,38 @@
+<header class="chrome">
+  <a href="{{ '/' | relative_url }}" class="brand">
+    <img class="brand-favicon" src="{{ '/favicon.ico' | relative_url }}" alt="" width="22" height="22">
+    <b>deadsoftie</b>
+    <span class="brand-tag">/ a research log</span>
+  </a>
+
+  <nav class="nav">
+    <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>Home</a>
+    <a href="{{ '/essays' | relative_url }}"{% if page.url contains '/essays' %} class="active"{% endif %}>Essays</a>
+    <a href="{{ '/notes' | relative_url }}"{% if page.url contains '/notes' %} class="active"{% endif %}>Notes</a>
+    <a href="{{ '/projects' | relative_url }}"{% if page.url contains '/projects' %} class="active"{% endif %}>Projects</a>
+    <a href="{{ '/bookshelf' | relative_url }}"{% if page.url == '/bookshelf/' or page.url == '/bookshelf' %} class="active"{% endif %}>Bookshelf</a>
+    <a href="{{ '/about' | relative_url }}"{% if page.url contains '/about' %} class="active"{% endif %}>About</a>
+  </nav>
+
+  <div class="chrome-right">
+    <span class="dot pulse"></span>
+    <form class="chrome-search" id="chrome-search-form" action="{{ '/essays' | relative_url }}" method="get" role="search">
+      <input type="search" name="q" id="chrome-search" placeholder="search essays..." autocomplete="off">
+    </form>
+  </div>
+
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+  </button>
+
+  <nav class="nav-drawer" id="nav-drawer">
+    <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>Home</a>
+    <a href="{{ '/essays' | relative_url }}"{% if page.url contains '/essays' %} class="active"{% endif %}>Essays</a>
+    <a href="{{ '/notes' | relative_url }}"{% if page.url contains '/notes' %} class="active"{% endif %}>Notes</a>
+    <a href="{{ '/projects' | relative_url }}"{% if page.url contains '/projects' %} class="active"{% endif %}>Projects</a>
+    <a href="{{ '/bookshelf' | relative_url }}"{% if page.url == '/bookshelf/' or page.url == '/bookshelf' %} class="active"{% endif %}>Bookshelf</a>
+    <a href="{{ '/about' | relative_url }}"{% if page.url contains '/about' %} class="active"{% endif %}>About</a>
+  </nav>
+</header>

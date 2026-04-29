@@ -1,0 +1,14 @@
+{% assign post = include.post %}
+{% assign num = include.num %}
+
+<a href="{{ post.url | relative_url }}" class="feat">
+  <div class="feat-num">No. {{ num }}</div>
+  <h3>{{ post.title }}</h3>
+  <p>{{ post.summary }}</p>
+  <div class="feat-meta">
+    <span>essay · {% assign words = post.content | strip_html | number_of_words %}{% assign mins = words | divided_by: 220 | plus: 1 %}{% if post.read_time %}{{ post.read_time }}{% else %}{{ mins }}{% endif %} min · {{ post.date | date: "%b %-d" }}</span>
+    {% if post.tags.first %}
+      <span class="tag">#{{ post.tags.first }}</span>
+    {% endif %}
+  </div>
+</a>

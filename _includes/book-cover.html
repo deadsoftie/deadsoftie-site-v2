@@ -1,0 +1,5 @@
+{% assign book = include.book %}
+<div class="book-cover" style="--cover: oklch({{ book.cover_color }});">
+  <div class="book-title">{{ book.title }}</div>
+  <div class="book-author">{{ book.author }}</div>
+</div>

@@ -1,0 +1,80 @@
+title: deadsoftie
+description: >
+  A game engine developer's notebook. Engine architecture, retro dev,
+  game design, and whatever else is on my mind.
+url: ""
+baseurl: ""
+
+# Author
+author:
+  name: Rahul Nair
+
+# Analytics
+google_analytics: G-N79YF9ET2L
+
+# Build settings
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+  toc_levels: 2..3
+  footnote_nr: 1
+  input: GFM
+
+highlighter: rouge
+
+# Collections
+collections:
+  essays:
+    output: true
+    permalink: /essays/:slug
+  notes:
+    output: true
+    permalink: /notes/:slug
+  projects:
+    output: true
+    permalink: /projects/:slug
+  books:
+    output: false
+
+# Front-matter defaults
+defaults:
+  - scope:
+      path: ""
+      type: essays
+    values:
+      layout: essay
+  - scope:
+      path: ""
+      type: notes
+    values:
+      layout: note
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - BOILERPLATE-essay.md
+  - handoff/
+  - components/
+  - screens/
+  - node_modules/
+  - vendor/
+
+# Sass
+sass:
+  style: compressed
+  sass_dir: _sass
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Feed
+feed:
+  path: /feed.xml

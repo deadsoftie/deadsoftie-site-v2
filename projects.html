@@ -1,0 +1,48 @@
+---
+layout: default
+title: Projects
+---
+
+<div class="container" style="padding-top: 56px; padding-bottom: 80px;">
+
+  <div class="eyebrow" style="margin-bottom: 14px;">section · 004</div>
+  <h1 class="h-display" style="font-size: 64px; margin: 0 0 14px;">
+    <span style="color: var(--accent); font-style: italic; font-family: var(--serif); font-size: 28px; vertical-align: top; margin-right: 8px;">{{ site.projects.size }}</span>
+    Projects
+  </h1>
+  <p style="color: var(--fg-dim); max-width: 520px; margin-bottom: 48px; font-size: 15px;">
+    Things I've built and maintain. Ranges from research code to small tools I use daily.
+  </p>
+
+  {% assign sorted_projects = site.projects | sort: "year" | reverse %}
+  {% for project in sorted_projects %}
+    <div class="project-row">
+      <div>
+        <div class="proj-name">{{ project.name }}</div>
+        <div class="proj-year-status">
+          <span>{{ project.year }}</span>
+          <span style="color: var(--rule);">·</span>
+          <span class="status-dot {{ project.status }}"></span>
+          <span>{{ project.status }}</span>
+        </div>
+      </div>
+      <div>
+        <div class="proj-desc">{{ project.summary }}</div>
+        {% if project.stack %}
+          <div class="proj-tags">
+            {% for s in project.stack %}
+              <span class="tag">{{ s }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="proj-meta">
+        {% if project.stars %}★ {{ project.stars }}{% endif %}
+        {% if project.url %}
+          <a href="{{ project.url }}" target="_blank" rel="noopener">{{ project.url | remove: "https://" | truncate: 28 }}</a>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+
+</div>

@@ -1,0 +1,76 @@
+/* Responsive breakpoints */
+
+@media (max-width: 1100px) {
+  .essay-layout {
+    grid-template-columns: 180px 1fr;
+
+    .essay-rail { display: none; }
+  }
+}
+
+@media (max-width: 860px) {
+  .chrome {
+    padding: 14px 20px;
+
+    .nav { display: none; }
+    .chrome-right { display: none; }
+  }
+
+  .nav-toggle { display: flex; }
+
+  .container { padding-left: 20px; padding-right: 20px; }
+
+  .hero-grid { grid-template-columns: 1fr !important; }
+
+  .home-hero h1 { font-size: 40px !important; }
+
+  .h-display { font-size: 48px !important; }
+
+  .essays-header-grid { grid-template-columns: 1fr !important; }
+
+  .notes-header-grid { grid-template-columns: 1fr !important; }
+
+  .notes-legend { display: none; }
+
+  .essay-layout {
+    grid-template-columns: 1fr;
+
+    .toc { display: none; }
+  }
+
+  .post-row {
+    grid-template-columns: 1fr !important;
+    gap: 8px;
+
+    .read { text-align: left; }
+    .post-tags { display: none; }
+  }
+
+  .project-row {
+    grid-template-columns: 1fr !important;
+
+    .proj-meta { text-align: left; margin-top: 8px; }
+  }
+
+  .feat-grid { grid-template-columns: 1fr !important; }
+
+  .notes-grid { column-count: 2 !important; }
+
+  .books-reading-grid { grid-template-columns: repeat(4, 1fr) !important; }
+
+  .foot { grid-template-columns: 1fr; .ascii { display: none; } }
+}
+
+@media (max-width: 600px) {
+  .h-display { font-size: 36px !important; }
+
+  .home-hero h1 { font-size: 28px !important; }
+
+  .year-num { font-size: 36px !important; }
+
+  .notes-grid { column-count: 1 !important; }
+
+  .books-reading-grid { grid-template-columns: repeat(3, 1fr) !important; }
+
+  .book-row-finished { grid-template-columns: auto 1fr !important; }
+}
