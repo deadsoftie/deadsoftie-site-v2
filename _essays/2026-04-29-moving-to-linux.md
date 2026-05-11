@@ -6,7 +6,7 @@ summary: >
   Copilot on the OS, a dedicated Copilot button on the keyboard, and Visual
   Studio. I had enough. Here is how the migration actually went.
 read_time: 6
-featured: false
+featured: true
 toc: false
 ---
 
