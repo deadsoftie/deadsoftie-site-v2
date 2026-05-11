@@ -14,7 +14,9 @@
   &:hover {
     padding-left: 8px;
 
-    .post-title { color: var(--accent); }
+    .post-title {
+      color: var(--accent);
+    }
   }
 
   .date {
@@ -71,7 +73,7 @@
     .year-num {
       font-family: var(--serif);
       font-size: 64px;
-      color: oklch(0.50 0.010 250);
+      color: oklch(0.5 0.01 250);
       letter-spacing: -0.03em;
       line-height: 1;
       margin: 0;
@@ -95,7 +97,9 @@
   border-top: 1px solid var(--rule-soft);
   transition: padding 0.2s;
 
-  &:hover { padding-left: 8px; }
+  &:hover {
+    padding-left: 8px;
+  }
 
   .proj-name {
     font-family: var(--serif);
@@ -118,13 +122,28 @@
     border-radius: 50%;
     display: inline-block;
 
-    &.active     { background: var(--ok); }
-    &.maintained { background: var(--accent); }
-    &.archived   { background: var(--muted); }
+    &.active {
+      background: var(--ok);
+    }
+    &.maintained {
+      background: var(--accent);
+    }
+    &.archived {
+      background: var(--muted);
+    }
   }
 
-  .proj-desc { font-size: 14px; color: var(--fg-dim); line-height: 1.5; }
-  .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .proj-desc {
+    font-size: 14px;
+    color: var(--fg-dim);
+    line-height: 1.5;
+  }
+  .proj-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
 
   .proj-meta {
     font-family: var(--mono);
@@ -132,6 +151,11 @@
     color: var(--muted);
     text-align: right;
 
-    a { color: var(--accent); display: block; margin-top: 4px; font-size: 10px; }
+    a {
+      color: var(--accent);
+      display: block;
+      margin-top: 4px;
+      font-size: 10px;
+    }
   }
 }

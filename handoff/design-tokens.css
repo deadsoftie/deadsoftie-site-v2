@@ -4,38 +4,43 @@
 
 :root {
   /* surfaces */
-  --bg:        oklch(0.20 0.005 250);
-  --bg-elev:   oklch(0.24 0.006 250);
-  --bg-deep:   oklch(0.16 0.005 250);
+  --bg: oklch(0.2 0.005 250);
+  --bg-elev: oklch(0.24 0.006 250);
+  --bg-deep: oklch(0.16 0.005 250);
 
   /* text */
-  --fg:        oklch(0.96 0.005 250);
-  --fg-dim:    oklch(0.80 0.008 250);
-  --muted:     oklch(0.66 0.010 250);
-  --muted-2:   oklch(0.55 0.010 250);
+  --fg: oklch(0.96 0.005 250);
+  --fg-dim: oklch(0.8 0.008 250);
+  --muted: oklch(0.66 0.01 250);
+  --muted-2: oklch(0.55 0.01 250);
 
   /* lines */
-  --rule:      oklch(0.36 0.010 250);
-  --rule-soft: oklch(0.30 0.008 250);
+  --rule: oklch(0.36 0.01 250);
+  --rule-soft: oklch(0.3 0.008 250);
 
   /* accents — Switch palette */
-  --accent:        oklch(0.66 0.18 252);
-  --accent-dim:    oklch(0.50 0.14 252);
-  --accent-glow:   oklch(0.66 0.18 252 / 0.18);
-  --accent-2:      oklch(0.62 0.20 25);
-  --accent-2-glow: oklch(0.62 0.20 25 / 0.18);
+  --accent: oklch(0.66 0.18 252);
+  --accent-dim: oklch(0.5 0.14 252);
+  --accent-glow: oklch(0.66 0.18 252 / 0.18);
+  --accent-2: oklch(0.62 0.2 25);
+  --accent-2-glow: oklch(0.62 0.2 25 / 0.18);
 
   /* semantic */
-  --ok:        oklch(0.78 0.12 150);
+  --ok: oklch(0.78 0.12 150);
 
   /* type */
   --serif: "Newsreader", "Iowan Old Style", "Apple Garamond", Georgia, serif;
-  --sans:  "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --sans:
+    "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 /* sensible defaults */
-html, body { background: var(--bg); color: var(--fg); }
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
 body {
   font-family: var(--sans);
   font-size: 16px;
@@ -43,6 +48,14 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-::selection { background: var(--accent-glow); color: var(--fg); }
-a { color: inherit; text-decoration: none; }
-a:hover { color: var(--accent); }
+::selection {
+  background: var(--accent-glow);
+  color: var(--fg);
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent);
+}

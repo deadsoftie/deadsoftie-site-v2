@@ -10,7 +10,8 @@ const Hero = () => {
     const dpr = window.devicePixelRatio || 1;
     const resize = () => {
       const r = c.getBoundingClientRect();
-      c.width = r.width * dpr; c.height = r.height * dpr;
+      c.width = r.width * dpr;
+      c.height = r.height * dpr;
       ctx.scale(dpr, dpr);
     };
     resize();
@@ -18,7 +19,8 @@ const Hero = () => {
     // sample word into points
     const r = c.getBoundingClientRect();
     const off = document.createElement("canvas");
-    off.width = r.width; off.height = r.height;
+    off.width = r.width;
+    off.height = r.height;
     const octx = off.getContext("2d");
     octx.fillStyle = "#fff";
     octx.font = "500 96px Inter Tight, system-ui, sans-serif";
@@ -34,9 +36,12 @@ const Hero = () => {
         const i = (y * r.width + x) * 4;
         if (img[i + 3] > 128) {
           points.push({
-            x, y,
-            ox: x, oy: y,
-            vx: 0, vy: 0,
+            x,
+            y,
+            ox: x,
+            oy: y,
+            vx: 0,
+            vy: 0,
             seed: Math.random(),
           });
         }
@@ -49,7 +54,10 @@ const Hero = () => {
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
     };
-    const onLeave = () => { mouse.x = -1000; mouse.y = -1000; };
+    const onLeave = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
     c.addEventListener("mousemove", onMove);
     c.addEventListener("mouseleave", onLeave);
 
@@ -57,23 +65,27 @@ const Hero = () => {
     let t = 0;
     // resolve accents once
     const resolve = (v) => {
-      const probe = document.createElement('div');
-      probe.style.color = getComputedStyle(document.documentElement).getPropertyValue(v) || 'rgb(140,180,235)';
+      const probe = document.createElement("div");
+      probe.style.color =
+        getComputedStyle(document.documentElement).getPropertyValue(v) ||
+        "rgb(140,180,235)";
       document.body.appendChild(probe);
       const m = getComputedStyle(probe).color.match(/\d+/g);
       document.body.removeChild(probe);
-      return m ? [parseInt(m[0]), parseInt(m[1]), parseInt(m[2])] : [140, 180, 235];
+      return m
+        ? [parseInt(m[0]), parseInt(m[1]), parseInt(m[2])]
+        : [140, 180, 235];
     };
-    let cAccent = resolve('--accent');
-    let cAccent2 = resolve('--accent-2');
+    let cAccent = resolve("--accent");
+    let cAccent2 = resolve("--accent-2");
     const cFg = [220, 220, 225];
     // re-resolve every 30 frames so tweaks are reflected live
     let frame = 0;
     const tick = () => {
       t += 0.016;
       if (++frame % 30 === 0) {
-        cAccent = resolve('--accent');
-        cAccent2 = resolve('--accent-2');
+        cAccent = resolve("--accent");
+        cAccent2 = resolve("--accent-2");
       }
       ctx.clearRect(0, 0, r.width, r.height);
       // word midpoint to split blue/red
@@ -95,8 +107,10 @@ const Hero = () => {
         // spring back
         p.vx += (p.ox - p.x) * 0.012;
         p.vy += (p.oy - p.y) * 0.012;
-        p.vx *= 0.88; p.vy *= 0.88;
-        p.x += p.vx; p.y += p.vy;
+        p.vx *= 0.88;
+        p.vy *= 0.88;
+        p.x += p.vx;
+        p.y += p.vy;
 
         const dist = Math.hypot(p.x - p.ox, p.y - p.oy);
         const heat = Math.min(1, dist / 30);
@@ -126,29 +140,64 @@ const Hero = () => {
   return (
     <div className="hero-canvas" style={{ marginTop: 14 }}>
       <div className="hero-grid" />
-      <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} />
-      <div style={{
-        position: "absolute", left: 18, top: 14,
-        fontFamily: "var(--mono)", fontSize: 11, color: "var(--muted)",
-        display: "flex", alignItems: "center", gap: 10,
-      }}>
-        <span className="dot pulse" style={{
-          width: 6, height: 6, borderRadius: "50%", background: "var(--accent)",
-          display: "inline-block",
-        }} />
+      <canvas
+        ref={canvasRef}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          left: 18,
+          top: 14,
+          fontFamily: "var(--mono)",
+          fontSize: 11,
+          color: "var(--muted)",
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+        }}
+      >
+        <span
+          className="dot pulse"
+          style={{
+            width: 6,
+            height: 6,
+            borderRadius: "50%",
+            background: "var(--accent)",
+            display: "inline-block",
+          }}
+        />
         <span>hover_to_disturb()</span>
       </div>
-      <div style={{
-        position: "absolute", right: 18, top: 14,
-        fontFamily: "var(--mono)", fontSize: 11, color: "var(--muted)",
-      }}>
+      <div
+        style={{
+          position: "absolute",
+          right: 18,
+          top: 14,
+          fontFamily: "var(--mono)",
+          fontSize: 11,
+          color: "var(--muted)",
+        }}
+      >
         {now.toISOString().slice(0, 19).replace("T", " ")} UTC
       </div>
-      <div style={{
-        position: "absolute", left: 18, bottom: 14,
-        fontFamily: "var(--mono)", fontSize: 10, color: "var(--muted-2, #666)",
-        letterSpacing: "0.1em", textTransform: "uppercase",
-      }}>
+      <div
+        style={{
+          position: "absolute",
+          left: 18,
+          bottom: 14,
+          fontFamily: "var(--mono)",
+          fontSize: 10,
+          color: "var(--muted-2, #666)",
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+        }}
+      >
         ~/notes/2026 · 47 essays · 132 notes · 18 papers · 7 projects
       </div>
     </div>

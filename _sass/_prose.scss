@@ -6,9 +6,13 @@
   color: var(--fg);
   max-width: 640px;
 
-  p { margin: 0 0 1.2em; }
+  p {
+    margin: 0 0 1.2em;
+  }
 
-  p:first-child { font-size: 19px; }
+  p:first-child {
+    font-size: 19px;
+  }
 
   h2 {
     font-family: var(--serif);
@@ -29,7 +33,9 @@
     color: var(--accent);
     border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent);
 
-    &:hover { background: var(--accent-glow); }
+    &:hover {
+      background: var(--accent-glow);
+    }
   }
 
   blockquote {
@@ -69,7 +75,9 @@
     }
   }
 
-  figure { margin: 1.8em 0; }
+  figure {
+    margin: 1.8em 0;
+  }
 
   figcaption {
     font-family: var(--mono);
@@ -80,11 +88,14 @@
     letter-spacing: 0.08em;
   }
 
-  ul, ol {
+  ul,
+  ol {
     padding-left: 1.4em;
     margin: 0 0 1.2em;
 
-    li { margin-bottom: 0.4em; }
+    li {
+      margin-bottom: 0.4em;
+    }
   }
 
   sup {
@@ -103,11 +114,42 @@
 /* Rouge syntax highlighting → token colors */
 .highlight,
 pre.highlight {
-  .k,  .kn, .kd, .kp, .kr, .kt { color: oklch(0.78 0.13 30); }
-  .nf, .nx                       { color: oklch(0.82 0.14 82); }
-  .s,  .s1, .s2, .sb, .se       { color: oklch(0.78 0.12 150); }
-  .c,  .c1, .cm                  { color: var(--muted); font-style: italic; }
-  .m,  .mi, .mf                  { color: oklch(0.78 0.13 250); }
-  .o                              { color: var(--fg-dim); }
-  .n,  .na, .nb                  { color: var(--fg); }
+  .k,
+  .kn,
+  .kd,
+  .kp,
+  .kr,
+  .kt {
+    color: oklch(0.78 0.13 30);
+  }
+  .nf,
+  .nx {
+    color: oklch(0.82 0.14 82);
+  }
+  .s,
+  .s1,
+  .s2,
+  .sb,
+  .se {
+    color: oklch(0.78 0.12 150);
+  }
+  .c,
+  .c1,
+  .cm {
+    color: var(--muted);
+    font-style: italic;
+  }
+  .m,
+  .mi,
+  .mf {
+    color: oklch(0.78 0.13 250);
+  }
+  .o {
+    color: var(--fg-dim);
+  }
+  .n,
+  .na,
+  .nb {
+    color: var(--fg);
+  }
 }

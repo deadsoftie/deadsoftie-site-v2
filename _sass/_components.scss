@@ -35,7 +35,10 @@
   background: transparent;
   cursor: pointer;
 
-  &:hover { border-color: var(--accent); color: var(--accent); }
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 
   &.is-active {
     border-color: var(--accent);
@@ -59,7 +62,10 @@
   cursor: pointer;
   transition: all 0.15s;
 
-  &:hover { border-color: var(--accent); color: var(--accent); }
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 
   &.btn-accent {
     background: var(--accent);
@@ -81,7 +87,11 @@
   border: 1px solid var(--rule-soft);
   border-radius: 6px;
   background:
-    radial-gradient(120% 80% at 0% 0%, color-mix(in oklab, var(--accent) 7%, transparent), transparent 60%),
+    radial-gradient(
+      120% 80% at 0% 0%,
+      color-mix(in oklab, var(--accent) 7%, transparent),
+      transparent 60%
+    ),
     var(--bg-elev);
   transition: all 0.2s;
 
@@ -154,7 +164,10 @@
     gap: 14px;
   }
 
-  li { display: grid; gap: 4px; }
+  li {
+    display: grid;
+    gap: 4px;
+  }
 
   .now-key {
     font-family: var(--mono);
@@ -164,7 +177,10 @@
     letter-spacing: 0.1em;
   }
 
-  .now-val { font-size: 14px; line-height: 1.45; }
+  .now-val {
+    font-size: 14px;
+    line-height: 1.45;
+  }
 
   .now-link {
     display: inline-block;
@@ -186,7 +202,10 @@
   background: var(--bg-elev);
   transition: all 0.2s;
 
-  &:hover { border-color: var(--accent); transform: translateY(-2px); }
+  &:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
 
   header {
     display: flex;
@@ -195,7 +214,9 @@
     margin-bottom: 10px;
   }
 
-  .note-stage { font-size: 18px; }
+  .note-stage {
+    font-size: 18px;
+  }
 
   .note-age {
     font-family: var(--mono);
@@ -211,7 +232,12 @@
     margin: 0 0 8px;
   }
 
-  p { font-size: 13px; color: var(--fg-dim); margin: 0; line-height: 1.5; }
+  p {
+    font-size: 13px;
+    color: var(--fg-dim);
+    margin: 0;
+    line-height: 1.5;
+  }
 
   footer {
     display: flex;
@@ -230,7 +256,11 @@
   width: 100%;
   aspect-ratio: 2 / 3;
   border-radius: 3px;
-  background: linear-gradient(160deg, var(--cover), color-mix(in oklab, var(--cover) 60%, black));
+  background: linear-gradient(
+    160deg,
+    var(--cover),
+    color-mix(in oklab, var(--cover) 60%, black)
+  );
   position: relative;
   overflow: hidden;
   box-shadow:
@@ -300,7 +330,10 @@
     font-size: 11px;
     transition: all 0.15s;
 
-    &:hover { color: var(--accent); border-color: var(--accent); }
+    &:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
   }
 }
 

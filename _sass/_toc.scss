@@ -41,8 +41,14 @@
     color: var(--fg-dim);
     transition: all 0.15s;
 
-    &:hover { color: var(--fg); border-color: var(--rule); }
-    &.active { color: var(--accent); border-left-color: var(--accent); }
+    &:hover {
+      color: var(--fg);
+      border-color: var(--rule);
+    }
+    &.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+    }
 
     &.lvl-3 {
       padding-left: 22px;
@@ -109,8 +115,13 @@
       margin-bottom: 10px;
       transition: color 0.15s;
 
-      &:last-child { border-bottom: 0; margin-bottom: 0; }
-      &:hover { color: var(--accent); }
+      &:last-child {
+        border-bottom: 0;
+        margin-bottom: 0;
+      }
+      &:hover {
+        color: var(--accent);
+      }
 
       .backlink-type {
         font-family: var(--mono);

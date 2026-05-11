@@ -173,6 +173,7 @@ Use `column-count: 3; column-gap: 16px;` on the container. Each note-card has
 ```
 
 Grid: `200px 1fr 200px`. Hover indents. Status colors:
+
 - `active` → `--ok`
 - `maintained` → `--accent`
 - `archived` → `--muted`
@@ -240,37 +241,64 @@ a real photo in.
 ## Prose styles (post body)
 
 ```css
-.prose { font-size: 17px; line-height: 1.7; color: var(--fg); max-width: 640px; }
-.prose p { margin: 0 0 1.2em; }
-.prose p:first-child { font-size: 19px; }      /* lead */
+.prose {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--fg);
+  max-width: 640px;
+}
+.prose p {
+  margin: 0 0 1.2em;
+}
+.prose p:first-child {
+  font-size: 19px;
+} /* lead */
 .prose h2 {
-  font-family: var(--serif); font-weight: 400; font-size: 28px;
-  letter-spacing: -0.015em; margin: 2.2em 0 0.6em;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing: -0.015em;
+  margin: 2.2em 0 0.6em;
 }
 .prose h3 {
-  font-family: var(--serif); font-weight: 400; font-size: 22px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 22px;
   margin: 1.6em 0 0.4em;
 }
 .prose a {
   color: var(--accent);
   border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent);
 }
-.prose a:hover { background: var(--accent-glow); }
+.prose a:hover {
+  background: var(--accent-glow);
+}
 .prose blockquote {
-  margin: 1.4em 0; padding-left: 18px;
+  margin: 1.4em 0;
+  padding-left: 18px;
   border-left: 2px solid var(--accent);
-  font-family: var(--serif); font-style: italic;
-  color: var(--fg-dim); font-size: 19px;
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--fg-dim);
+  font-size: 19px;
 }
 .prose code {
-  font-family: var(--mono); font-size: 0.86em;
-  background: var(--bg-elev); border: 1px solid var(--rule-soft);
-  border-radius: 3px; padding: 1px 5px;
+  font-family: var(--mono);
+  font-size: 0.86em;
+  background: var(--bg-elev);
+  border: 1px solid var(--rule-soft);
+  border-radius: 3px;
+  padding: 1px 5px;
 }
-.prose figure { margin: 1.8em 0; }
+.prose figure {
+  margin: 1.8em 0;
+}
 .prose figcaption {
-  font-family: var(--mono); font-size: 11px;
-  color: var(--muted); margin-top: 8px;
-  text-transform: uppercase; letter-spacing: 0.08em;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 ```

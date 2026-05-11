@@ -55,10 +55,10 @@ index.html                   ← home
 permalink: /:collection/:slug
 
 collections:
-  essays:    { output: true, permalink: /essays/:slug }
-  notes:     { output: true, permalink: /notes/:slug }
-  projects:  { output: true, permalink: /projects/:slug }
-  books:     { output: false }  # rendered through bookshelf.html only
+  essays: { output: true, permalink: /essays/:slug }
+  notes: { output: true, permalink: /notes/:slug }
+  projects: { output: true, permalink: /projects/:slug }
+  books: { output: false } # rendered through bookshelf.html only
 
 defaults:
   - scope: { path: "", type: "essays" }
@@ -75,6 +75,7 @@ kramdown:
 
 Footnotes via `[^1]` syntax map to your sidenote component if you write a
 small Liquid filter or post-process the rendered HTML. Easiest path:
+
 - Render with `kramdown` (footnotes become an `<ol class="footnotes">` at end)
 - In `essay.html` layout, after rendering content, move each `<li id="fn:N">`
   into a sidenote slot in the right rail with JS, OR
@@ -119,11 +120,36 @@ In `_sass/_prose.scss` (after importing tokens):
 
 ```scss
 .highlight {
-  .k, .kn, .kd, .kp, .kr, .kt { color: oklch(0.78 0.13 30); }   /* keyword */
-  .nf, .nx                    { color: oklch(0.82 0.14 82); }   /* function */
-  .s, .s1, .s2, .sb, .se      { color: oklch(0.78 0.12 150); }  /* string */
-  .c, .c1, .cm                { color: var(--muted); font-style: italic; } /* comment */
-  .m, .mi, .mf                { color: oklch(0.78 0.13 250); }  /* number */
+  .k,
+  .kn,
+  .kd,
+  .kp,
+  .kr,
+  .kt {
+    color: oklch(0.78 0.13 30);
+  } /* keyword */
+  .nf,
+  .nx {
+    color: oklch(0.82 0.14 82);
+  } /* function */
+  .s,
+  .s1,
+  .s2,
+  .sb,
+  .se {
+    color: oklch(0.78 0.12 150);
+  } /* string */
+  .c,
+  .c1,
+  .cm {
+    color: var(--muted);
+    font-style: italic;
+  } /* comment */
+  .m,
+  .mi,
+  .mf {
+    color: oklch(0.78 0.13 250);
+  } /* number */
 }
 ```
 
@@ -149,13 +175,14 @@ A 6-line copy-button JS:
 
 ```html
 <script>
-document.querySelectorAll('[data-copy]').forEach(b => {
-  b.addEventListener('click', () => {
-    const code = b.closest('.codeblock').querySelector('pre').innerText;
-    navigator.clipboard.writeText(code);
-    b.textContent = 'copied'; setTimeout(() => b.textContent = 'copy', 1200);
+  document.querySelectorAll("[data-copy]").forEach((b) => {
+    b.addEventListener("click", () => {
+      const code = b.closest(".codeblock").querySelector("pre").innerText;
+      navigator.clipboard.writeText(code);
+      b.textContent = "copied";
+      setTimeout(() => (b.textContent = "copy"), 1200);
+    });
   });
-});
 </script>
 ```
 

@@ -1,8 +1,13 @@
 /* Base reset + sensible defaults */
 
-*, *::before, *::after { box-sizing: border-box; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-html, body {
+html,
+body {
   background: var(--bg);
   color: var(--fg);
   margin: 0;
@@ -17,14 +22,29 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-::selection { background: var(--accent-glow); color: var(--fg); }
+::selection {
+  background: var(--accent-glow);
+  color: var(--fg);
+}
 
-a { color: inherit; text-decoration: none; }
-a:hover { color: var(--accent); }
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent);
+}
 
-img { max-width: 100%; display: block; }
-figure { margin: 0; }
-button { font-family: inherit; }
+img {
+  max-width: 100%;
+  display: block;
+}
+figure {
+  margin: 0;
+}
+button {
+  font-family: inherit;
+}
 
 .container {
   max-width: 1180px;
