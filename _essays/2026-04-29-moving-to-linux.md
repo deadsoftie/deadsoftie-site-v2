@@ -10,6 +10,8 @@ featured: true
 toc: false
 ---
 
+<img src="/assets/images/fedora-post.png" alt="Fedora KDE Plasma desktop" style="width:100%;max-width:1200px;border-radius:6px;margin-bottom:1.4em;">
+
 I bought a Lenovo Legion last year. Great machine. RTX 4060, solid build, good for development. It also came with a dedicated Copilot button on the keyboard.
 
 Getting Copilot properly off the machine (not just disabled, actually gone, including the language packs and background services that came bundled with it) turned out to be a small project in itself. I got it done. But the fact that I had to do it at all sat with me for a while. This was the same OS that I was using for game development and academic work at DigiPen, and I was spending time undoing things the OS had installed on my behalf.
