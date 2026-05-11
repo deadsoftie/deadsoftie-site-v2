@@ -7,7 +7,7 @@ title: Now
   <div class="eyebrow" style="margin-bottom: 14px;">now · {{ site.data.now.last_updated | date: "%B %-d, %Y" }}</div>
   <h1 class="h-display" style="font-size: 56px; margin: 0 0 36px;">/now</h1>
 
-  <div class="prose">
+  <div class="prose" markdown="1">
 
 **Writing:** {{ site.data.now.writing }}
 
