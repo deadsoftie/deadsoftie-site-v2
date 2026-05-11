@@ -4,6 +4,10 @@
   grid-template-columns: 200px 1fr 220px;
   gap: 60px;
   max-width: 1440px;
+
+  > * {
+    min-width: 0;
+  }
 }
 
 /* Sticky TOC + reading progress */
