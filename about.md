@@ -9,7 +9,7 @@ title: About
 
   <div style="display: grid; grid-template-columns: 1fr 280px; gap: 60px; align-items: start;">
 
-    <div class="prose">
+    <div class="prose" markdown="1">
 
 ## Hi, I'm Rahul
 
