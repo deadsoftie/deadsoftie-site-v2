@@ -157,5 +157,17 @@
       margin-top: 4px;
       font-size: 10px;
     }
+
+    .proj-gh-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      color: var(--muted);
+      transition: color 0.15s;
+
+      &:hover {
+        color: var(--fg);
+      }
+    }
   }
 }
