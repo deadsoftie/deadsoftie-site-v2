@@ -1,0 +1,198 @@
+---
+layout: default
+title: Chief of the Valley
+permalink: /valley-chief/
+description: >
+  Build a PC company from a one-person operation in the dawn of computing to an industry titan in the modern era. The Valley is an unforgiving place.
+---
+
+<!-- Hero -->
+<div class="valley-hero">
+  <div class="container" style="position: relative; z-index: 1; padding-top: 0; padding-bottom: 0;">
+    <div class="eyebrow" style="justify-content: center; margin-bottom: 20px;">
+      deadsoftie · solo dev · in development
+    </div>
+
+    <img class="valley-hero-logo" src="{{ '/assets/images/valley-chief-logo.png' | relative_url }}" alt="Chief of the Valley">
+
+    <img class="valley-hero-icon" src="{{ '/assets/images/valley-chief-icon.png' | relative_url }}" alt="Chief of the Valley icon">
+
+    <div class="valley-status-badge">
+      <span class="dot" style="background: var(--accent-2); box-shadow: 0 0 0 3px oklch(0.62 0.2 25 / 0.25); flex-shrink: 0;"></span>
+      In Development &middot; v1.1.0
+    </div>
+
+    <p class="valley-tagline">
+      Build a PC company from a one-person operation in the dawn of computing to an industry titan in the modern era. Manage staff, secure contracts, research technology, and ship products all while keeping yourself from financial ruin. The Valley is an unforgiving place.
+    </p>
+
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <a href="https://store.steampowered.com/app/4787290/Chief_of_the_Valley/" target="_blank" rel="noopener" class="btn btn-steam">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.606 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.497 1.009 2.453-.397.957-1.497 1.41-2.455 1.014zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.662 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.252 0-2.265-1.014-2.265-2.265z"/></svg>
+        Wishlist on Steam
+      </a>
+      <a href="#devlogs" class="btn" style="background: var(--accent-2); border-color: var(--accent-2); color: white; font-weight: 600;">
+        Read devlogs ↓
+      </a>
+      <a href="{{ '/feed.xml' | relative_url }}" class="btn">
+        Subscribe via RSS
+      </a>
+    </div>
+
+    <img class="valley-banner"
+         src="{{ '/assets/images/valley-chief-blog-banner.png' | relative_url }}"
+         alt="Chief of the Valley gameplay">
+  </div>
+</div>
+
+<hr class="valley-section-rule">
+
+<!-- About -->
+<div class="container" style="padding-top: 72px; padding-bottom: 60px;">
+  <div class="eyebrow" style="margin-bottom: 16px;">about the game</div>
+  <div class="valley-about-grid">
+    <div class="prose">
+      <p>
+        Chief of the Valley is a turn-based tech company management sim that puts you in the shoes of a startup founder at the birth of personal computing. Every decision matters: who you hire, what you build, which technologies you chase, and whether you can make payroll this week.
+      </p>
+      <p>
+        Start with nothing but personal savings and a reputation to build. Take on contracts to keep the lights on, assemble a team of engineers and designers, and inch your way up the ladder while navigating a market full of rivals with their own agendas.
+      </p>
+      <p>
+        Built in C++17 with raylib, with no engine shortcuts. Every system, from the UI to the turn simulation, tech tree, and NPC AI, is hand-rolled. The visual layer tracks the current era and swaps to a new theme when the first tech node of a new tier unlocks, giving aggressive researchers a visual upgrade before players who don't. An iOS port is currently in active development.
+      </p>
+    </div>
+
+    <aside class="valley-facts">
+      <div class="valley-fact">
+        <span class="fact-key">Status</span>
+        <span class="fact-val">In Development</span>
+      </div>
+      <div class="valley-fact">
+        <span class="fact-key">Version</span>
+        <span class="fact-val">v1.1.0</span>
+      </div>
+      <div class="valley-fact">
+        <span class="fact-key">Platforms</span>
+        <span class="fact-val">PC · iOS (upcoming)</span>
+      </div>
+      <div class="valley-fact">
+        <span class="fact-key">Engine</span>
+        <span class="fact-val">Custom C++17 + raylib</span>
+      </div>
+      <div class="valley-fact">
+        <span class="fact-key">Genre</span>
+        <span class="fact-val">Turn-based company sim</span>
+      </div>
+      <div class="valley-fact">
+        <span class="fact-key">Developer</span>
+        <span class="fact-val">Rahul Nair (deadsoftie)</span>
+      </div>
+      <div class="valley-fact">
+        <span class="fact-key">Store</span>
+        <span class="fact-val"><a href="https://store.steampowered.com/app/4787290/Chief_of_the_Valley/" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none;">Steam →</a></span>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- Screenshots -->
+<div class="container" style="padding-top: 0; padding-bottom: 64px;">
+  <div class="eyebrow" style="margin-bottom: 16px;">screenshots</div>
+
+  <div class="valley-carousel" id="valley-carousel">
+    <div class="valley-carousel-track" id="valley-carousel-track">
+      <img src="{{ '/assets/images/valley-chief-screenshots/main-menu.png' | relative_url }}" alt="Main menu">
+      <img src="{{ '/assets/images/valley-chief-screenshots/company-screen.png' | relative_url }}" alt="Company overview">
+      <img src="{{ '/assets/images/valley-chief-screenshots/market-screen.png' | relative_url }}" alt="Market screen">
+      <img src="{{ '/assets/images/valley-chief-screenshots/products-screen-01.png' | relative_url }}" alt="Products screen">
+      <img src="{{ '/assets/images/valley-chief-screenshots/products-screen-02.png' | relative_url }}" alt="Products screen detail">
+      <img src="{{ '/assets/images/valley-chief-screenshots/staff-screen.png' | relative_url }}" alt="Staff management">
+      <img src="{{ '/assets/images/valley-chief-screenshots/tech-tree.png' | relative_url }}" alt="Technology tree">
+    </div>
+    <button class="valley-carousel-btn valley-carousel-prev" aria-label="Previous screenshot">&#8249;</button>
+    <button class="valley-carousel-btn valley-carousel-next" aria-label="Next screenshot">&#8250;</button>
+    <div class="valley-carousel-dots" id="valley-carousel-dots">
+      <button class="active" aria-label="Slide 1"></button>
+      <button aria-label="Slide 2"></button>
+      <button aria-label="Slide 3"></button>
+      <button aria-label="Slide 4"></button>
+      <button aria-label="Slide 5"></button>
+      <button aria-label="Slide 6"></button>
+      <button aria-label="Slide 7"></button>
+    </div>
+  </div>
+
+  <div class="valley-screenshots">
+    <img src="{{ '/assets/images/valley-chief-screenshots/company-screen.png' | relative_url }}" alt="Company overview">
+    <img src="{{ '/assets/images/valley-chief-screenshots/market-screen.png' | relative_url }}" alt="Market screen">
+    <img src="{{ '/assets/images/valley-chief-screenshots/products-screen-01.png' | relative_url }}" alt="Products screen">
+    <img src="{{ '/assets/images/valley-chief-screenshots/products-screen-02.png' | relative_url }}" alt="Products screen detail">
+    <img src="{{ '/assets/images/valley-chief-screenshots/staff-screen.png' | relative_url }}" alt="Staff management">
+    <img src="{{ '/assets/images/valley-chief-screenshots/tech-tree.png' | relative_url }}" alt="Technology tree">
+  </div>
+</div>
+
+<!-- Devlogs -->
+{% assign devlogs = site.essays | where_exp: "e", "e.tags contains 'chief-of-the-valley'" | sort: "date" | reverse %}
+<div class="container" style="padding-top: 0; padding-bottom: 100px;" id="devlogs">
+  <div class="valley-devlog-header">
+    <div>
+      <div class="eyebrow" style="margin-bottom: 10px;">development log</div>
+      <h2 class="h-serif" style="font-size: 28px; margin: 0;">Devlogs</h2>
+    </div>
+    <span class="mono" style="font-size: 12px; color: var(--muted);">{{ devlogs.size }} entr{% if devlogs.size == 1 %}y{% else %}ies{% endif %}</span>
+  </div>
+
+  {% if devlogs.size > 3 %}
+    <div>
+      {% for post in devlogs %}
+        {% include post-row.html post=post %}
+      {% endfor %}
+    </div>
+  {% else %}
+    {% assign feat_nums = "I,II,III" | split: "," %}
+    <div class="feat-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+      {% for post in devlogs %}
+        {% assign feat_num = feat_nums[forloop.index0] %}
+        {% include feat-card.html post=post num=feat_num %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+<script>
+(function () {
+  var track = document.getElementById('valley-carousel-track');
+  var dots = document.querySelectorAll('#valley-carousel-dots button');
+  var total = dots.length;
+  var current = 0;
+  var timer;
+
+  function go(n) {
+    current = (n + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+  }
+
+  dots.forEach(function (d, i) {
+    d.addEventListener('click', function () { stopAuto(); go(i); startAuto(); });
+  });
+
+  document.querySelector('.valley-carousel-prev').addEventListener('click', function () {
+    stopAuto(); go(current - 1); startAuto();
+  });
+  document.querySelector('.valley-carousel-next').addEventListener('click', function () {
+    stopAuto(); go(current + 1); startAuto();
+  });
+
+  var carousel = document.getElementById('valley-carousel');
+  carousel.addEventListener('mouseenter', stopAuto);
+  carousel.addEventListener('mouseleave', startAuto);
+
+  function startAuto() { timer = setInterval(function () { go(current + 1); }, 4000); }
+  function stopAuto() { clearInterval(timer); }
+
+  startAuto();
+}());
+</script>
