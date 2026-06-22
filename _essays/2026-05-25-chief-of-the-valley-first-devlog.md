@@ -6,7 +6,7 @@ summary: >
   Building a turn-based PC company sim in C++17 and raylib from scratch.
   Everything that got built, broken, and rebuilt on the way to v0.4.
 read_time: 9
-pinned: true
+pinned: false
 featured: true
 toc: true
 ---

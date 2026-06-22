@@ -7,6 +7,7 @@ summary: >
   touch targets, scroll behavior, audio, an in-game keyboard, and the
   legibility decisions that come with high-density displays.
 read_time: 7
+pinned: true
 featured: true
 toc: true
 links:
