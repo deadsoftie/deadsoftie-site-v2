@@ -29,7 +29,7 @@ The iPad version can rotate freely between landscape-left and landscape-right. T
 
 Mouse cursors are precise. A button can be small because you can point at anything you can see. Fingers are not precise. A button that is comfortable to click with a mouse is frustrating to tap reliably on a touch screen, especially near the edges of the device or when you are holding it one-handed.
 
-The fix is to make everything's tappable area larger than its visible area. Interactive elements in the game — buttons, navigation tabs, list rows — have hit regions that extend beyond their visible edges. The layout looks the same. The invisible margin around each element absorbs the imprecision of a tap and means you do not have to aim carefully to interact with things.
+The fix is to make everything's tappable area larger than its visible area. Interactive elements in the game (buttons, navigation tabs, list rows) have hit regions that extend beyond their visible edges. The layout looks the same. The invisible margin around each element absorbs the imprecision of a tap and means you do not have to aim carefully to interact with things.
 
 ## Scrolling Through Lists
 
