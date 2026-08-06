@@ -4,183 +4,33 @@ title: Bookshelf
 ---
 
 <div class="container" style="padding-top: 56px; padding-bottom: 80px">
-  <div class="eyebrow" style="margin-bottom: 14px">section · 005</div>
-  <h1 class="h-display" style="font-size: 64px; margin: 0 0 14px">Bookshelf</h1>
-  <p
-    style="
-      color: var(--fg-dim);
-      max-width: 520px;
-      margin-bottom: 48px;
-      font-size: 15px;
-    "
-  >
+  <div class="eyebrow" style="margin-bottom: 8px">bookshelf</div>
+  <h1 class="h-display" style="font-size: 38px; margin: 0 0 14px">Bookshelf</h1>
+  <p style="max-width: 60ch; font-size: 15px; line-height: 1.6; color: var(--fg-dim); margin: 0 0 36px">
     Books I'm reading, have read, or abandoned with opinions.
   </p>
 
-  {% assign reading = site.books | where: "status", "reading" %} {% assign
-  finished = site.books | where: "status", "finished" | sort: "finished" |
-  reverse %} {% assign abandoned = site.books | where: "status", "abandoned" %}
+  {% assign reading = site.books | where: "status", "reading" %}
+  {% assign finished = site.books | where: "status", "finished" | sort: "finished" | reverse %}
+  {% assign abandoned = site.books | where: "status", "abandoned" %}
+  {% assign shelf = reading | concat: finished | concat: abandoned %}
 
-  <!-- Currently reading -->
-  {% if reading.size > 0 %}
-  <div style="margin-bottom: 48px">
-    <div
-      style="
-        font-family: var(--serif);
-        font-style: italic;
-        color: var(--accent);
-        font-size: 15px;
-        margin-bottom: 20px;
-      "
-    >
-      i. Currently reading
-    </div>
-    <div
-      class="books-reading-grid"
-      style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px"
-    >
-      {% for book in reading %}
-      <a
-        href="#"
-        style="display: block"
-        title="{{ book.title }} by {{ book.author }}"
-      >
-        {% include book-cover.html book=book %}
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-  {% endif %}
-
-  <!-- Recently finished -->
-  {% if finished.size > 0 %}
-  <div style="margin-bottom: 48px">
-    <div
-      style="
-        font-family: var(--serif);
-        font-style: italic;
-        color: var(--accent);
-        font-size: 15px;
-        margin-bottom: 8px;
-      "
-    >
-      ii. Recently finished
-    </div>
-    {% for book in finished %}
-    <div
-      class="book-row-finished"
-      style="
-        display: grid;
-        grid-template-columns: 60px 1fr 80px 80px;
-        gap: 16px;
-        align-items: start;
-        padding: 18px 0;
-        border-top: 1px solid var(--rule-soft);
-      "
-    >
-      <div style="width: 50px">{% include book-cover.html book=book %}</div>
-      <div>
-        <div
-          style="font-family: var(--serif); font-size: 17px; margin-bottom: 4px"
-        >
-          {{ book.title }}
-        </div>
-        <div
-          style="font-family: var(--mono); font-size: 11px; color: var(--muted)"
-        >
-          {{ book.author }} · {{ book.year }}
-        </div>
-        {% if book.note %}
-        <div
-          style="
-            font-size: 13px;
-            color: var(--fg-dim);
-            margin-top: 8px;
-            font-style: italic;
-          "
-        >
-          "{{ book.note | truncatewords: 20 }}"
-        </div>
-        {% endif %}
-      </div>
-      <div
-        style="font-family: var(--mono); font-size: 12px; color: var(--muted)"
-      >
-        {% if book.rating %} {% assign stars = book.rating %} {% for i in
-        (1..stars) %}★{% endfor %} {% endif %}
-      </div>
-      <div
-        style="
-          font-family: var(--mono);
-          font-size: 11px;
-          color: var(--muted);
-          text-align: right;
-        "
-      >
-        {% if book.finished %}{{ book.finished | date: "%b %Y" }}{% endif %}
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-  {% endif %}
-
-  <!-- Abandoned -->
-  {% if abandoned.size > 0 %}
   <div>
-    <div
-      style="
-        font-family: var(--serif);
-        font-style: italic;
-        color: var(--accent-2);
-        font-size: 15px;
-        margin-bottom: 8px;
-      "
-    >
-      iii. Abandoned
+    {% for book in shelf %}
+    <div class="post-row" style="cursor: default">
+      <span class="row-top">
+        <span class="post-title">{{ book.title }}</span>
+      </span>
+      <span class="row-meta">
+        <span>{{ book.author }}</span>
+        <span>·</span>
+        <span class="tag{% if book.status == 'reading' %} is-active{% endif %}">{{ book.status }}</span>
+        {% if book.status == 'finished' and book.finished %}<span>·</span><span>{{ book.finished | date: "%b %Y" }}</span>{% endif %}
+        {% if book.note %}<span>·</span><span>"{{ book.note | truncatewords: 20 }}"</span>{% endif %}
+      </span>
     </div>
-    {% for book in abandoned %}
-    <div
-      style="
-        display: grid;
-        grid-template-columns: 60px 1fr;
-        gap: 16px;
-        align-items: start;
-        padding: 18px 0;
-        border-top: 1px solid var(--rule-soft);
-      "
-    >
-      <div style="width: 50px">{% include book-cover.html book=book %}</div>
-      <div>
-        <div
-          style="
-            font-family: var(--serif);
-            font-size: 17px;
-            margin-bottom: 4px;
-            color: var(--accent-2);
-          "
-        >
-          {{ book.title }}
-        </div>
-        <div
-          style="font-family: var(--mono); font-size: 11px; color: var(--muted)"
-        >
-          {{ book.author }} · {{ book.year }}
-        </div>
-        {% if book.note %}
-        <div
-          style="
-            font-size: 13px;
-            color: var(--fg-dim);
-            margin-top: 8px;
-            font-style: italic;
-          "
-        >
-          "{{ book.note | truncatewords: 20 }}"
-        </div>
-        {% endif %}
-      </div>
-    </div>
+    {% else %}
+    <p style="color: var(--muted); font-size: 14px">Nothing on the shelf yet.</p>
     {% endfor %}
   </div>
-  {% endif %}
 </div>

@@ -1,7 +1,7 @@
 ---
 title: "Developing Snake on GBDK-2020"
 date: 2025-11-13
-tags: [gamedev, c, retro]
+tags: [gamedev]
 summary: >
   Building a Snake workshop for Game Boy development using GBDK-2020. LCG
   RNG, sprite limits, bitplanes, and the limits of an 8-bit CPU.

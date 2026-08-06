@@ -1,34 +1,36 @@
-/* deadsoftie — design tokens (Switch palette) */
+/* deadsoftie — design tokens (Modernist palette) */
 
 :root {
   /* surfaces */
-  --bg: oklch(0.2 0.005 250);
-  --bg-elev: oklch(0.24 0.006 250);
-  --bg-deep: oklch(0.16 0.005 250);
+  --bg: #f3f2f2;
+  --bg-elev: #eae9e9;
+  --bg-deep: #e5e3e3;
 
   /* text */
-  --fg: oklch(0.96 0.005 250);
-  --fg-dim: oklch(0.8 0.008 250);
-  --muted: oklch(0.66 0.01 250);
-  --muted-2: oklch(0.55 0.01 250);
+  --fg: #201e1d;
+  --fg-dim: #444141;
+  --muted: #605d5d;
+  --muted-2: #7d7979;
 
   /* lines */
-  --rule: oklch(0.36 0.01 250);
-  --rule-soft: oklch(0.3 0.008 250);
+  --rule: color-mix(in srgb, #201e1d 40%, transparent);
+  --rule-soft: color-mix(in srgb, #201e1d 22%, transparent);
 
-  /* accents — Switch palette */
-  --accent: oklch(0.66 0.18 252);
-  --accent-dim: oklch(0.5 0.14 252);
-  --accent-glow: oklch(0.66 0.18 252 / 0.18);
-  --accent-2: oklch(0.62 0.2 25);
-  --accent-2-glow: oklch(0.62 0.2 25 / 0.18);
+  /* accents — Modernist palette (mono scheme: one red carries both roles) */
+  --accent: #ec3013;
+  --accent-dim: #ae1800;
+  --accent-glow: color-mix(in srgb, #ec3013 12%, transparent);
+  --accent-2: #e15b47;
+  --accent-2-glow: color-mix(in srgb, #e15b47 12%, transparent);
 
   /* semantic */
-  --ok: oklch(0.78 0.12 150);
+  --ok: #3a7d3a;
 
-  /* type stacks */
-  --serif: "Newsreader", "Iowan Old Style", "Apple Garamond", Georgia, serif;
-  --sans:
-    "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  /* type stacks — Archivo everywhere in the UI; a real monospace is kept
+     only for code (see .prose code/pre in _prose.scss), never referenced
+     as --mono so nothing else can accidentally pick it up. */
+  --serif: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono-code: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }

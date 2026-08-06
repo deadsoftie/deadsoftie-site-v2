@@ -17,22 +17,22 @@
 
   h2 {
     font-family: var(--serif);
-    font-weight: 400;
-    font-size: 28px;
+    font-weight: 800;
+    font-size: 26px;
     letter-spacing: -0.015em;
     margin: 2.2em 0 0.6em;
   }
 
   h3 {
     font-family: var(--serif);
-    font-weight: 400;
-    font-size: 22px;
+    font-weight: 600;
+    font-size: 20px;
     margin: 1.6em 0 0.4em;
   }
 
   a {
     color: var(--accent);
-    border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent);
+    border-bottom: 1px solid var(--accent);
 
     &:hover {
       background: var(--accent-glow);
@@ -43,28 +43,26 @@
     margin: 1.4em 0;
     padding-left: 18px;
     border-left: 2px solid var(--accent);
-    font-family: var(--serif);
-    font-style: italic;
     color: var(--fg-dim);
-    font-size: 19px;
+    font-size: 18px;
   }
 
   code {
-    font-family: var(--mono);
+    font-family: var(--mono-code);
     font-size: 0.86em;
     background: var(--bg-elev);
     border: 1px solid var(--rule-soft);
-    border-radius: 3px;
+    border-radius: 0;
     padding: 1px 5px;
   }
 
   pre {
     background: var(--bg-deep);
     border: 1px solid var(--rule-soft);
-    border-radius: 6px;
+    border-radius: 0;
     padding: 14px 16px;
     overflow-x: auto;
-    font-family: var(--mono);
+    font-family: var(--mono-code);
     font-size: 13px;
     line-height: 1.6;
 
@@ -81,7 +79,6 @@
   }
 
   figcaption {
-    font-family: var(--mono);
     font-size: 11px;
     color: var(--muted);
     margin-top: 8px;
@@ -101,14 +98,33 @@
 
   sup {
     color: var(--accent);
-    font-family: var(--mono);
     font-size: 0.75em;
   }
 
   hr {
     border: 0;
-    border-top: 1px solid var(--rule-soft);
+    border-top: 2px solid var(--rule-soft);
     margin: 2em 0;
+  }
+
+  /* Kramdown footnotes — rendered plain at the end of the essay now that
+     the sidenote rail is gone. */
+  .footnotes {
+    margin-top: 3em;
+    padding-top: 1.5em;
+    border-top: 2px solid var(--rule-soft);
+    font-size: 14px;
+    color: var(--fg-dim);
+
+    ol {
+      padding-left: 1.2em;
+    }
+
+    a.reversefootnote {
+      color: var(--accent);
+      border-bottom: 0;
+      margin-left: 4px;
+    }
   }
 }
 
@@ -121,29 +137,28 @@ pre.highlight {
   .kp,
   .kr,
   .kt {
-    color: oklch(0.78 0.13 30);
+    color: oklch(0.55 0.16 30);
   }
   .nf,
   .nx {
-    color: oklch(0.82 0.14 82);
+    color: oklch(0.5 0.14 82);
   }
   .s,
   .s1,
   .s2,
   .sb,
   .se {
-    color: oklch(0.78 0.12 150);
+    color: oklch(0.5 0.12 150);
   }
   .c,
   .c1,
   .cm {
     color: var(--muted);
-    font-style: italic;
   }
   .m,
   .mi,
   .mf {
-    color: oklch(0.78 0.13 250);
+    color: oklch(0.5 0.13 250);
   }
   .o {
     color: var(--fg-dim);

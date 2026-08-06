@@ -1,7 +1,7 @@
 ---
 title: "Chief of the Valley: The First Devlog"
 date: 2026-05-25
-tags: [gamedev, c++, raylib, devlog, chief-of-the-valley]
+tags: [gamedev, devlog, chief-of-the-valley]
 summary: >
   Building a turn-based PC company sim in C++17 and raylib from scratch.
   Everything that got built, broken, and rebuilt on the way to v0.4.
@@ -11,7 +11,7 @@ featured: true
 toc: true
 ---
 
-<img src="/assets/images/valley-chief-blog-banner.png" alt="Chief of the Valley" style="width:100%;max-width:1200px;border-radius:6px;margin-bottom:1.4em;">
+<img src="/assets/images/valley-chief-blog-banner.png" alt="Chief of the Valley" style="width:100%;max-width:1200px;margin-bottom:1.4em;">
 
 Chief of the Valley is a turn-based PC company simulator I have been building as a solo project. The premise is simple: you start at Year 0001 as a one-person PC software company, take out loans, hire staff, sign contracts, research technology, license software from third parties, and compete against NPC companies as the industry evolves through distinct eras. The goal is to grow your company into something worth running, before the market or your own mismanagement does it for you.
 

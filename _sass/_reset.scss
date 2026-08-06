@@ -16,7 +16,7 @@ body {
 
 body {
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -47,39 +47,38 @@ button {
 }
 
 .container {
-  max-width: 1180px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding-left: 36px;
-  padding-right: 36px;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 hr.hr-dashed {
   border: 0;
-  border-top: 1px dashed var(--rule);
+  border-top: 2px solid var(--rule-soft);
   margin: 24px 0;
+}
+
+hr.hr {
+  height: 2px;
+  border: 0;
+  margin: 24px 0;
+  background: var(--rule-soft);
 }
 
 /* Typography helpers */
 .h-display {
   font-family: var(--serif);
-  font-weight: 400;
-  letter-spacing: -0.025em;
-  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
 }
 
 .h-serif {
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .mono {
   font-family: var(--mono);
-}
-
-.section-num {
-  font-family: var(--serif);
-  font-style: italic;
-  color: var(--accent);
-  font-size: 0.75em;
-  margin-right: 8px;
 }

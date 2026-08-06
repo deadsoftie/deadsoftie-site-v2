@@ -1,7 +1,7 @@
 ---
 title: "Porting the Render Lab to Linux: What Actually Broke"
 date: 2026-04-30
-tags: [linux, opengl, c++, cmake]
+tags: [linux, opengl]
 summary: >
   Migrating the render-lab project from MSBuild to CMake on Fedora. The build
   system move was straightforward. The four things that broke after that were

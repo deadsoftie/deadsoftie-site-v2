@@ -1,7 +1,7 @@
 ---
 title: "Porting Chief of the Valley to iOS"
 date: 2026-06-10
-tags: [gamedev, ios, devlog, chief-of-the-valley]
+tags: [gamedev, devlog, chief-of-the-valley]
 summary: >
   Taking a desktop management sim to iPad and iPhone. Landscape orientation,
   touch targets, scroll behavior, audio, an in-game keyboard, and the

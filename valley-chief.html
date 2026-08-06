@@ -18,7 +18,7 @@ description: >
     <img class="valley-hero-icon" src="{{ '/assets/images/valley-chief-icon.png' | relative_url }}" alt="Chief of the Valley icon">
 
     <div class="valley-status-badge">
-      <span class="dot" style="background: var(--accent-2); box-shadow: 0 0 0 3px oklch(0.62 0.2 25 / 0.25); flex-shrink: 0;"></span>
+      <span class="dot" style="background: var(--accent-2); flex-shrink: 0;"></span>
       In Development &middot; v1.1.0
     </div>
 
@@ -144,21 +144,11 @@ description: >
     <span class="mono" style="font-size: 12px; color: var(--muted);">{{ devlogs.size }} entr{% if devlogs.size == 1 %}y{% else %}ies{% endif %}</span>
   </div>
 
-  {% if devlogs.size > 3 %}
-    <div>
-      {% for post in devlogs %}
-        {% include post-row.html post=post %}
-      {% endfor %}
-    </div>
-  {% else %}
-    {% assign feat_nums = "I,II,III" | split: "," %}
-    <div class="feat-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-      {% for post in devlogs %}
-        {% assign feat_num = feat_nums[forloop.index0] %}
-        {% include feat-card.html post=post num=feat_num %}
-      {% endfor %}
-    </div>
-  {% endif %}
+  <div>
+    {% for post in devlogs %}
+      {% include post-row.html post=post %}
+    {% endfor %}
+  </div>
 </div>
 
 <hr class="valley-section-rule">

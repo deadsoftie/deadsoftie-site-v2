@@ -1,13 +1,5 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>
-  {% if page.title %}{{ page.title }} · deadsoftie{% else %}deadsoftie{% endif
-  %}
-</title>
-<meta
-  name="description"
-  content="{% if page.summary %}{{ page.summary | strip_html | truncatewords: 30 }}{% else %}{{ site.description }}{% endif %}"
-/>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-N79YF9ET2L"></script>
@@ -19,19 +11,22 @@
   gtag('config', 'G-N79YF9ET2L');
 </script>
 
-<!-- Google Fonts -->
+<!-- Google Fonts: Archivo drives the whole UI; JetBrains Mono is kept only for code blocks -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&family=JetBrains+Mono:wght@400;500;600&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
   rel="stylesheet"
 />
 
 <!-- Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
 
-<!-- SEO -->
-{% seo %}
+<!-- SEO: title + description both come from here now — page.summary (essays)
+     falls back to page.description (e.g. Valley Chief) then site.description,
+     so nothing upstream needs to hand-roll a <title>/<meta description> too -->
+{% assign seo_description = page.summary | default: page.description | strip_html | truncatewords: 30 %}
+{% seo description=seo_description %}
 
 <!-- Feed -->
 <link

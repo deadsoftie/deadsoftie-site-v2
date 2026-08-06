@@ -1,7 +1,7 @@
 ---
 title: "Moving to Linux: How I Ended Up on Fedora"
 date: 2026-04-29
-tags: [linux, fedora, tools, personal]
+tags: [linux, personal]
 summary: >
   Copilot on the OS, a dedicated Copilot button on the keyboard, and Visual
   Studio. I had enough. Here is how the migration actually went.
@@ -10,7 +10,7 @@ featured: true
 toc: false
 ---
 
-<img src="/assets/images/fedora-post.png" alt="Fedora KDE Plasma desktop" style="width:100%;max-width:1200px;border-radius:6px;margin-bottom:1.4em;">
+<img src="/assets/images/fedora-post.png" alt="Fedora KDE Plasma desktop" style="width:100%;max-width:1200px;margin-bottom:1.4em;">
 
 I bought a Lenovo Legion last year. Great machine. RTX 4060, solid build, good for development. It also came with a dedicated Copilot button on the keyboard.
 

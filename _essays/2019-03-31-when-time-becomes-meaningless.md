@@ -1,7 +1,7 @@
 ---
 title: "When Time Becomes Meaningless"
 date: 2019-03-31
-tags: [philosophy]
+tags: []
 summary: >
   In a few order of trillion years, entropy reaches unity and time becomes
   meaningless. What does that mean for how we live now?

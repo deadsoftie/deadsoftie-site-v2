@@ -4,164 +4,37 @@ title: Essays
 ---
 
 <div class="container" style="padding-top: 56px; padding-bottom: 80px">
-  <!-- Header + search -->
-  <div
-    class="essays-header-grid"
-    style="
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: 60px;
-      align-items: end;
-      margin-bottom: 36px;
-    "
-  >
-    <div>
-      <div class="eyebrow" style="margin-bottom: 14px">section · 002</div>
-      <h1 class="h-display" style="font-size: 72px; margin: 0">
-        <span
-          style="
-            color: var(--accent);
-            font-style: italic;
-            font-family: var(--serif);
-            font-size: 28px;
-            vertical-align: top;
-            margin-right: 8px;
-          "
-          >{{ site.essays.size }}</span
-        >
-        Essays
-      </h1>
-      <p
-        style="
-          color: var(--fg-dim);
-          max-width: 520px;
-          margin-top: 14px;
-          font-size: 15px;
-        "
-      >
-        Long-form pieces. These get edited, sat with, and re-edited. If
-        something here is wrong, it's wrong on purpose; if it's wrong by
-        accident, please tell me.
-      </p>
-    </div>
-    <div
-      style="
-        border: 1px solid var(--rule);
-        border-radius: 4px;
-        padding: 10px 14px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: var(--bg-elev);
-      "
-    >
-      <span class="mono" style="color: var(--muted); font-size: 13px">/</span>
-      <input
-        id="essay-search"
-        type="text"
-        placeholder="search {{ site.essays.size }} essays…"
-        style="
-          flex: 1;
-          background: transparent;
-          border: 0;
-          outline: 0;
-          color: var(--fg);
-          font-family: var(--mono);
-          font-size: 13px;
-        "
-      />
-      <span class="kbd">esc</span>
-    </div>
-  </div>
+  <div class="eyebrow" style="margin-bottom: 8px">essays</div>
+  <h1 class="h-display" style="font-size: 38px; margin: 0 0 14px">{{ site.essays.size }} Essays</h1>
+  <p style="max-width: 60ch; font-size: 15px; line-height: 1.6; color: var(--fg-dim); margin: 0 0 32px">
+    Long-form pieces. These get edited, sat with, and re-edited. If something here is wrong, it's wrong on
+    purpose; if it's wrong by accident, please tell me.
+  </p>
 
   <!-- Tag filter bar -->
-  {% assign all_tags = "" %} {% for essay in site.essays %} {% for tag in
-  essay.tags %} {% unless all_tags contains tag %} {% assign all_tags = all_tags
-  | append: tag | append: "," %} {% endunless %} {% endfor %} {% endfor %} {%
-  assign tag_list = all_tags | split: "," | uniq | sort %}
+  {% assign all_tags = "" %}
+  {% for essay in site.essays %}
+    {% for tag in essay.tags %}
+      {% unless all_tags contains tag %}{% assign all_tags = all_tags | append: tag | append: "," %}{% endunless %}
+    {% endfor %}
+  {% endfor %}
+  {% assign tag_list = all_tags | split: "," | uniq | sort %}
 
-  <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px">
+  <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 36px">
     <button class="tag is-active" data-tag="all">all</button>
-    {% for tag in tag_list %} {% if tag != "" %}
-    <button class="tag" data-tag="{{ tag }}">#{{ tag }}</button>
-    {% endif %} {% endfor %}
-  </div>
-
-  <!-- Sort + count row -->
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--muted);
-      padding: 10px 0;
-      border-top: 1px solid var(--rule-soft);
-      border-bottom: 1px solid var(--rule-soft);
-      margin-bottom: 0;
-    "
-  >
-    <span id="essay-count">{{ site.essays.size }} matching</span>
-    <div style="display: flex; gap: 16px">
-      <button
-        class="sort-btn is-active"
-        data-sort="new"
-        style="
-          background: transparent;
-          border: 0;
-          cursor: pointer;
-          color: var(--accent);
-          font-family: var(--mono);
-          font-size: 11px;
-          padding: 0;
-        "
-      >
-        newest
-      </button>
-      <button
-        class="sort-btn"
-        data-sort="long"
-        style="
-          background: transparent;
-          border: 0;
-          cursor: pointer;
-          color: var(--fg-dim);
-          font-family: var(--mono);
-          font-size: 11px;
-          padding: 0;
-        "
-      >
-        longest
-      </button>
-      <button
-        class="sort-btn"
-        data-sort="short"
-        style="
-          background: transparent;
-          border: 0;
-          cursor: pointer;
-          color: var(--fg-dim);
-          font-family: var(--mono);
-          font-size: 11px;
-          padding: 0;
-        "
-      >
-        shortest
-      </button>
-    </div>
+    {% for tag in tag_list %}{% if tag != "" %}<button class="tag" data-tag="{{ tag }}">#{{ tag }}</button>{% endif %}{% endfor %}
   </div>
 
   <!-- JS render() always replaces this on load; noscript fallback only -->
   <div id="essays-list">
     <noscript>
-      {% assign sorted = site.essays | sort: "date" | reverse %} {% for essay in
-      sorted %}{% include post-row.html post=essay %}{% endfor %}
+      {% assign sorted = site.essays | sort: "date" | reverse %}
+      {% for essay in sorted %}{% include post-row.html post=essay %}{% endfor %}
     </noscript>
   </div>
 </div>
 
-<!-- Build search data into page -->
+<!-- Data for the tag-filter script -->
 <script>
   window.__essays = [
     {% for essay in site.essays %}
@@ -169,9 +42,7 @@ title: Essays
       "title": {{ essay.title | jsonify }},
       "url": {{ essay.url | relative_url | jsonify }},
       "date": {{ essay.date | date: "%Y-%m-%d" | jsonify }},
-      "year": {{ essay.date | date: "%Y" | jsonify }},
       "tags": {{ essay.tags | jsonify }},
-      "summary": {{ essay.summary | jsonify }},
       "words": {{ essay.content | strip_html | number_of_words }},
       "pinned": {{ essay.pinned | default: false | jsonify }},
       "read_time": {{ essay.read_time | default: 0 | jsonify }}
@@ -179,4 +50,4 @@ title: Essays
     {% endfor %}
   ];
 </script>
-<script src="{{ '/assets/js/search.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/essays-filter.js' | relative_url }}"></script>

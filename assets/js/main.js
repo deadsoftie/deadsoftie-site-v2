@@ -19,29 +19,6 @@
   });
 })();
 
-// Chrome search: on essays page mirror to essay search; elsewhere submit as ?q=
-(function () {
-  var chromeInput = document.getElementById("chrome-search");
-  var chromeForm = document.getElementById("chrome-search-form");
-  if (!chromeInput) return;
-
-  var essayInput = document.getElementById("essay-search");
-  if (essayInput) {
-    chromeInput.addEventListener("input", function () {
-      essayInput.value = chromeInput.value;
-      essayInput.dispatchEvent(new Event("input"));
-    });
-  } else if (chromeForm) {
-    chromeForm.addEventListener("submit", function (e) {
-      var q = chromeInput.value.trim();
-      if (!q) {
-        e.preventDefault();
-        return;
-      }
-    });
-  }
-})();
-
 // Copy buttons for code blocks
 document.querySelectorAll("[data-copy], .copy").forEach(function (btn) {
   btn.addEventListener("click", function () {

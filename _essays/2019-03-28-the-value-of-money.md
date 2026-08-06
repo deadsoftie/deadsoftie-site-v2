@@ -1,7 +1,7 @@
 ---
 title: "The Value of the Concept of Money"
 date: 2019-03-28
-tags: [philosophy]
+tags: []
 summary: >
   Not the history of money, but the philosophical importance of it. How it
   interacts with people and influences entire civilisations.

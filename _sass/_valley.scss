@@ -1,22 +1,8 @@
-/* Valley Chief — game landing page */
+/* Valley Chief — game landing page. */
 
 .valley-hero {
-  position: relative;
-  overflow: hidden;
   padding: 80px 0 0;
   text-align: center;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      ellipse 80% 55% at 50% 0%,
-      var(--accent-2-glow),
-      transparent 70%
-    );
-    pointer-events: none;
-  }
 }
 
 .valley-hero-logo {
@@ -26,32 +12,15 @@
   display: block;
 }
 
-.valley-hero-title {
-  font-family: var(--serif);
-  font-size: 76px;
-  font-weight: 400;
-  line-height: 1.0;
-  letter-spacing: -0.03em;
-  margin: 0 0 24px;
-  color: var(--fg);
-
-  em {
-    color: var(--accent-2);
-    font-style: italic;
-  }
-}
-
 .valley-status-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--mono);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent-2);
-  border: 1px solid color-mix(in oklab, var(--accent-2) 60%, transparent);
-  border-radius: 3px;
+  border: 1px solid var(--accent-2);
   padding: 4px 11px;
   margin-bottom: 20px;
 }
@@ -68,7 +37,6 @@
   width: 100%;
   max-width: 960px;
   margin: 52px auto 0;
-  border-radius: 8px 8px 0 0;
   display: block;
   border: 1px solid var(--rule-soft);
   border-bottom: none;
@@ -77,7 +45,7 @@
 /* Divider between hero and about */
 .valley-section-rule {
   border: 0;
-  border-top: 1px solid var(--rule-soft);
+  border-top: 2px solid var(--rule-soft);
   margin: 0;
 }
 
@@ -91,7 +59,6 @@
 
 .valley-facts {
   border: 1px solid var(--rule-soft);
-  border-radius: 6px;
   background: var(--bg-elev);
   padding: 20px 22px;
 
@@ -112,7 +79,6 @@
   }
 
   .fact-key {
-    font-family: var(--mono);
     font-size: 10px;
     color: var(--muted);
     text-transform: uppercase;
@@ -126,10 +92,11 @@
   }
 }
 
-/* Steam CTA button */
+/* Steam CTA button — kept in Steam's own brand color; a Modernist
+   monochrome red button here would misrepresent the storefront link. */
 .btn-steam {
   background: #1b2838;
-  border-color: #4a90d9;
+  border-color: #1b2838;
   color: #c7d5e0;
   font-weight: 600;
 
@@ -139,7 +106,7 @@
 
   &:hover {
     background: #2a475e;
-    border-color: #66b3ff;
+    border-color: #2a475e;
     color: #fff;
   }
 }
@@ -148,16 +115,13 @@
 .valley-hero-icon {
   width: 72px;
   height: 72px;
-  border-radius: 16px;
   display: block;
   margin: 0 auto 18px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Screenshot carousel */
 .valley-carousel {
   position: relative;
-  border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--rule-soft);
   margin-bottom: 14px;
@@ -183,10 +147,8 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: color-mix(in oklab, var(--bg) 80%, transparent);
-  backdrop-filter: blur(8px);
+  background: var(--bg);
   border: 1px solid var(--rule-soft);
-  border-radius: 4px;
   color: var(--fg);
   width: 36px;
   height: 36px;
@@ -197,11 +159,11 @@
   font-size: 22px;
   line-height: 1;
   opacity: 0;
-  transition: opacity 0.2s, background 0.15s;
+  transition: opacity 0.2s;
   padding: 0;
 
   &:hover {
-    background: var(--bg-elev);
+    color: var(--accent);
   }
 
   &.valley-carousel-prev {
@@ -226,13 +188,12 @@
     height: 6px;
     border-radius: 50%;
     border: 0;
-    background: rgba(255, 255, 255, 0.35);
+    background: color-mix(in srgb, #fff 45%, transparent);
     cursor: pointer;
     padding: 0;
-    transition: background 0.2s;
 
     &.active {
-      background: white;
+      background: #fff;
     }
   }
 }
@@ -247,29 +208,13 @@
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    border-radius: 6px;
     border: 1px solid var(--rule-soft);
     display: block;
-    transition: transform 0.2s, border-color 0.2s;
 
     &:hover {
-      transform: scale(1.02);
       border-color: var(--accent-2);
     }
   }
-}
-
-.valley-screenshot-placeholder {
-  aspect-ratio: 16 / 9;
-  border: 1px dashed var(--rule);
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--muted-2);
-  background: var(--bg-elev);
 }
 
 /* Devlog section */
@@ -282,10 +227,6 @@
 
 /* Responsive */
 @media (max-width: 860px) {
-  .valley-hero-title {
-    font-size: 48px;
-  }
-
   .valley-about-grid {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -297,10 +238,6 @@
 }
 
 @media (max-width: 600px) {
-  .valley-hero-title {
-    font-size: 36px;
-  }
-
   .valley-hero {
     padding-top: 56px;
   }

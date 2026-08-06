@@ -1,32 +1,18 @@
-{% assign post = include.post %} {% assign words = post.content | strip_html |
-number_of_words %} {% assign minutes = words | divided_by: 220 | plus: 1 %}
+{% assign post = include.post %}
+{% assign words = post.content | strip_html | number_of_words %}
+{% assign minutes = words | divided_by: 220 | plus: 1 %}
+{% assign tags_text = "" %}
+{% for tag in post.tags %}{% assign tags_text = tags_text | append: "#" | append: tag | append: " " %}{% endfor %}
 
-<a
-  href="{{ post.url | relative_url }}"
-  class="post-row"
-  {%
-  if
-  post.pinned
-  %}
-  style="
-    background: linear-gradient(90deg, var(--accent-2-glow), transparent 40%);
-  "
-  {%
-  endif
-  %}
->
-  <div class="date">{{ post.date | date: "%d %b %Y" }}</div>
-  <div class="post-title">
-    {% if post.pinned %}<span class="pin-tag">★ pinned</span>{% endif %} {{
-    post.title }}
-  </div>
-  <div class="post-tags">
-    {% for tag in post.tags %}
-    <span class="tag">#{{ tag }}</span>
-    {% endfor %}
-  </div>
-  <div class="read">
-    {% if post.read_time %}{{ post.read_time }}{% else %}{{ minutes }}{% endif
-    %} min
-  </div>
+<a href="{{ post.url | relative_url }}" class="post-row">
+  <span class="row-top">
+    {% if post.pinned %}<span class="pin-tag">pinned</span>{% endif %}
+    <span class="post-title">{{ post.title }}</span>
+  </span>
+  <span class="row-meta">
+    <span>{{ post.date | date: "%d %b %Y" }}</span>
+    <span>·</span>
+    <span>{% if post.read_time %}{{ post.read_time }}{% else %}{{ minutes }}{% endif %} min</span>
+    {% if post.tags.size > 0 %}<span>·</span><span>{{ tags_text | strip }}</span>{% endif %}
+  </span>
 </a>
