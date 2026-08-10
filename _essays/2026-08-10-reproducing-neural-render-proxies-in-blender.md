@@ -16,6 +16,11 @@ pinned: true
   <figcaption style="text-align:center;">Live NRP relighting preview in the Blender viewport, native room scene</figcaption>
 </figure>
 
+<figure>
+  <video src="/assets/images/nrp-blender/nrp-blender-video.webm" controls muted loop playsinline style="display:block;width:100%;max-width:600px;margin:0 auto;"></video>
+  <figcaption style="text-align:center;">Live preview demo, dragging a virtual light in the viewport with the preview image updating in real time</figcaption>
+</figure>
+
 I spent the last few weeks reproducing a paper from this year's Eurographics Symposium on Rendering: *Neural Render Proxies for Interactive and Differentiable Lighting*, by Sergio Sancho, Alexander Rath, Marco Manzi, Pascal Chang, Amit Bermano, Derek Nowrouzezahrai, Markus Gross, and Marios Papas (ETH Zurich, Disney Research, Tel Aviv University, McGill, Mila)[^1]. It's a genuinely clever idea: train a tiny neural network that stands in for a full path tracer's lighting response, so an artist can drag lights around a static scene and see a physically plausible result at 30 to 60 frames a second, with real gradients flowing back to the light parameters so an optimizer can solve for lighting instead of an artist hand tuning it.
 
 There's no official code release, so this was a from-scratch reimplementation working only from the paper text and figures. That's the interesting part of a reproduction: the paper tells you what the system does, not the hundred small decisions that make it actually run. This post covers both, the method as described and the process of getting it working end to end inside Blender, including the bugs, because most of what I actually learned came from the bugs.
@@ -270,11 +275,6 @@ The addon does exactly one thing: live virtual-light relighting through the side
 <figure>
   <img src="/assets/images/nrp-blender/nrp-plugin.png" alt="NRP addon N-panel, checkpoint box and virtual lights box" style="display:block;width:100%;max-width:300px;margin:0 auto;">
   <figcaption style="text-align:center;">NRP addon N-panel, checkpoint box and virtual lights box</figcaption>
-</figure>
-
-<figure>
-  <video src="/assets/images/nrp-blender/nrp-blender-video.webm" controls muted loop playsinline style="display:block;width:100%;max-width:600px;margin:0 auto;"></video>
-  <figcaption style="text-align:center;">Live preview demo, dragging a virtual light in the viewport with the preview image updating in real time</figcaption>
 </figure>
 
 <figure>
