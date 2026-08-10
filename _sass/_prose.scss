@@ -96,6 +96,34 @@
     }
   }
 
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.6em 0;
+    font-size: 15px;
+    display: block;
+    overflow-x: auto;
+    border: 1px solid var(--rule-soft);
+  }
+
+  th,
+  td {
+    border: 1px solid var(--rule-soft);
+    padding: 8px 14px;
+    text-align: left;
+  }
+
+  thead th {
+    background: var(--bg-elev);
+    font-family: var(--serif);
+    font-weight: 700;
+    border-bottom: 2px solid var(--rule);
+  }
+
+  tbody tr:nth-child(even) {
+    background: var(--bg-elev);
+  }
+
   sup {
     color: var(--accent);
     font-size: 0.75em;
