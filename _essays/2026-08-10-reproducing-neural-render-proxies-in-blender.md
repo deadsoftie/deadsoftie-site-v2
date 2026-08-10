@@ -317,6 +317,10 @@ A few things worth stating plainly rather than smoothing over. The point-light s
 
 This project taught me a lot about how network training is actually supposed to be done, past what any tutorial covers, and also about writing a Blender plugin for the first time, and how straightforward it turned out to be to build tools for Blender. Beyond that, what stuck with me most wasn't the headline PSNR numbers, it was how many of the real bugs had nothing to do with the neural network at all. A circular header include. A const-qualified pointer. A render scheduler splitting work into batches in a way nothing in the paper could have warned about. A vertical flip between two conventions for what counts as row zero. None of that is neural-rendering-specific, it's just what happens when you actually build the thing instead of reading about it, and it's also exactly the part a paper can't tell you, because the paper is describing the idea that worked, not the fifteen small things that had to be fixed first for it to work.
 
+## Acknowledgements
+
+None of this exists without the paper it's built on. Thanks to Sergio Sancho, Alexander Rath, Marco Manzi, Pascal Chang, Amit Bermano, Derek Nowrouzezahrai, Markus Gross, and Marios Papas for *Neural Render Proxies for Interactive and Differentiable Lighting*[^1], a clearly written paper that left enough of the right detail in to make a from-scratch reimplementation possible with no official code to check against. And thanks to Benedikt Bitterli for maintaining his rendering resources page[^2], the Cornell box, bedroom, and every other scene used through this project's validation stages came from there.
+
 [^1]: Sergio Sancho, Alexander Rath, Marco Manzi, Pascal Chang, Amit H. Bermano, Derek Nowrouzezahrai, Markus Gross, and Marios Papas, "Neural Render Proxies for Interactive and Differentiable Lighting," *Computer Graphics Forum* 45, no. 4 (2026), Eurographics Symposium on Rendering 2026.
 
 [^2]: Benedikt Bitterli, *Rendering resources*, 2016, https://benedikt-bitterli.me/resources/
