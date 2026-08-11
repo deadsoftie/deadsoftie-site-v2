@@ -21,15 +21,15 @@ pinned: true
   <figcaption style="text-align:center;">Live preview demo, dragging a virtual light in the viewport with the preview image updating in real time</figcaption>
 </figure>
 
-I spent the last few weeks reproducing a paper from this year's Eurographics Symposium on Rendering: *Neural Render Proxies for Interactive and Differentiable Lighting*, by Sergio Sancho, Alexander Rath, Marco Manzi, Pascal Chang, Amit Bermano, Derek Nowrouzezahrai, Markus Gross, and Marios Papas (ETH Zurich, Disney Research, Tel Aviv University, McGill, Mila)[^1]. It's a genuinely clever idea: train a tiny neural network that stands in for a full path tracer's lighting response, so an artist can drag lights around a static scene and see a physically plausible result at 30 to 60 frames a second, with real gradients flowing back to the light parameters so an optimizer can solve for lighting instead of an artist hand tuning it.
+I spent the last few weeks reproducing a paper from this year's Eurographics Symposium on Rendering: _Neural Render Proxies for Interactive and Differentiable Lighting_, by Sergio Sancho, Alexander Rath, Marco Manzi, Pascal Chang, Amit Bermano, Derek Nowrouzezahrai, Markus Gross, and Marios Papas (ETH Zurich, Disney Research, Tel Aviv University, McGill, Mila)[^1]. It's a genuinely clever idea: train a tiny neural network that stands in for a full path tracer's lighting response, so an artist can drag lights around a static scene and see a physically plausible result at 30 to 60 frames a second, with real gradients flowing back to the light parameters so an optimizer can solve for lighting instead of an artist hand tuning it.
 
-There's no official code release, so this was a from-scratch reimplementation working only from the paper text and figures. That's the interesting part of a reproduction: the paper tells you what the system does, not the hundred small decisions that make it actually run. This post covers both, the method as described and the process of getting it working end to end inside Blender, including the bugs, because most of what I actually learned came from the bugs.
+This post covers both, the method as described and the process of getting it working end to end inside Blender, including the bugs, because most of what I actually learned came from the bugs.
 
 ## The paper's core idea: decoupling the render
 
 A normal path tracer does two jobs at once for every bounce: it decides where the ray goes next (BSDF importance sampling, maybe next-event estimation toward a light), and it accumulates whatever light that bounce actually sees. Those two jobs get re-run from scratch every time you move a light, even though moving a light doesn't change the geometry, materials, or camera at all.
 
-The paper's insight is that you can split those jobs apart, because a *virtual* light, one that exists only for the purpose of testing ray intersections, doesn't perturb path generation. If you trace a path using pure BSDF sampling with no light-aware bias, and only afterward test that path's segments against a light instead of biasing the path toward it, the path itself stays a fair sample of the scene's transport regardless of where the light is. That decoupling has a name in the paper:
+The paper's insight is that you can split those jobs apart, because a _virtual_ light, one that exists only for the purpose of testing ray intersections, doesn't perturb path generation. If you trace a path using pure BSDF sampling with no light-aware bias, and only afterward test that path's segments against a light instead of biasing the path toward it, the path itself stays a fair sample of the scene's transport regardless of where the light is. That decoupling has a name in the paper:
 
 - **SamplePaths**, run once, expensive: trace camera rays with BSDF-only importance sampling, no next-event estimation, no emission accumulated along the way. Record every path vertex's position and the throughput carried up to that point.
 - **GatherLight**, run per lighting configuration, cheap: for every recorded path segment, test whether it intersects a given light. On a hit, add throughput times that light's emission to the pixel. Because light transport is linear, this decomposes cleanly per light, so multiple lights are just a sum.
@@ -79,7 +79,7 @@ The **neural render proxy** (NRP) is one compact model per light type. It takes 
    final pixel = sum over all lights of  color(light) * N(pixel, aux, light)
 ```
 
-Deliberately leaving color and intensity out of the network's input is a small but important trick: it means the network only has to learn how radiance depends on a light's *geometry*, and the caller scales the output by the light's emitted color after the fact. Same trick as the linearity used in GatherLight itself, just pushed one layer up.
+Deliberately leaving color and intensity out of the network's input is a small but important trick: it means the network only has to learn how radiance depends on a light's _geometry_, and the caller scales the output by the light's emitted color after the fact. Same trick as the linearity used in GatherLight itself, just pushed one layer up.
 
 Training happens on the fly, no pre-rendered dataset: every iteration samples a random light configuration, computes the target pixel values by running GatherLight against the path dump, denoises that target with Intel's OIDN (the same denoiser Blender ships), and trains against it with a relative-MSE loss borrowed from Müller et al.'s Neural Radiance Caching work, with a stop-gradient on the prediction to stabilize the high dynamic range. The paper's headline numbers: 35 to 41 dB tonemapped PSNR on academic scenes, 30 to 60 Hz interactive relighting, model sizes of 5 to 13 MB, and a striking claim that training on one 64-spp light-agnostic path dump beats an image-based baseline trained on up to 1024 separately rendered, fully-lit images by more than 2.8 dB, because the win is about how much lighting information each sample carries, not raw compute spent.
 
@@ -87,7 +87,7 @@ Training happens on the fly, no pre-rendered dataset: every iteration samples a 
 
 This wasn't my first attempt at reproducing a neural rendering paper in this fork of Blender. An earlier project tried to reproduce Neural Radiance Caching, baking a cache trained on one renderer's radiance field and then querying it inside the render kernel itself. That track got shelved for a specific reason: a cache trained on renderer A's field systematically fails inside renderer B, because the frozen bake loses exactly the transport estimate the target renderer's own sampler would have found at query time.
 
-NRP sidesteps that failure mode by construction. The path dump that trains the network and the GatherLight computation it's measured against both come from the *same* renderer, whichever one produced the dump. There's no cross-renderer field to go stale. That single structural difference is most of why this reproduction actually finished.
+NRP sidesteps that failure mode by construction. The path dump that trains the network and the GatherLight computation it's measured against both come from the _same_ renderer, whichever one produced the dump. There's no cross-renderer field to go stale. That single structural difference is most of why this reproduction actually finished.
 
 ## System architecture, three processes and one socket
 
@@ -172,19 +172,19 @@ The check itself: does GatherLight over the dump converge toward a reference ren
 
 With the decoupling validated, `nrp_net.py` implements the actual proxy: a tinycudann 2D hashgrid encoding on the pixel coordinates (16 levels, 2 features per level, base resolution 16), concatenated with the 7 auxiliary feature channels and the 4 light parameters, feeding an MLP. I ran most iteration at a smaller 128-neuron, 4-layer network to fit comfortably in 8 GB, then confirmed the paper's own reference size, 256 neurons across 8 layers, on headline runs.
 
-`train_nrp.py` is the largest piece of code in the whole project, and most of its complexity is the image pool. A denoiser needs one full, coherent lighting configuration per image, it can't denoise a target that's a patchwork of different light setups, so you can't just render a fresh scene per training step, that would defeat batching entirely. Instead the training loop keeps a pool of 64 denoised images, each rendered from GatherLight under one randomly sampled light configuration, and refreshes one of them every few iterations. Critically, each individual pixel in a training batch is drawn from an *independently* random image in the pool, so even though every single pool image only shows one lighting setup, a batch of pixels drawn across the pool sees enormous lighting diversity. That's the mechanism that keeps the network from just memorizing one lighting condition. Loss is relative MSE with a stop-gradient on the prediction, `(pred - target)^2 / (pred.detach()^2 + eps)`, matching the paper's borrowed formulation from Neural Radiance Caching.
+`train_nrp.py` is the largest piece of code in the whole project, and most of its complexity is the image pool. A denoiser needs one full, coherent lighting configuration per image, it can't denoise a target that's a patchwork of different light setups, so you can't just render a fresh scene per training step, that would defeat batching entirely. Instead the training loop keeps a pool of 64 denoised images, each rendered from GatherLight under one randomly sampled light configuration, and refreshes one of them every few iterations. Critically, each individual pixel in a training batch is drawn from an _independently_ random image in the pool, so even though every single pool image only shows one lighting setup, a batch of pixels drawn across the pool sees enormous lighting diversity. That's the mechanism that keeps the network from just memorizing one lighting condition. Loss is relative MSE with a stop-gradient on the prediction, `(pred - target)^2 / (pred.detach()^2 + eps)`, matching the paper's borrowed formulation from Neural Radiance Caching.
 
 There was one real bug here worth describing because it's the kind that quietly wrecks training without ever throwing an error. Light centers for training were sampled by picking a random point along a random recorded path segment, which is a reasonable way to bias sampling toward regions the camera can actually see. But segment zero, the piece of path between the camera and its first hit, was included in that pool, and a light center sampled onto it could land almost inside the near plane, producing a giant, blown-out disk that dominated the loss for that batch. Excluding segment zero from the candidate set dropped the starting loss from roughly 8.7 to 1.25 and cut mean SMAPE on held-out light configs from 0.39 to 0.07.
 
-Headline result at the paper's reference network size, 15,000 iterations on the Cornell box: mean tonemapped PSNR 38.62 dB, median 35.86 dB, mean SMAPE 0.097, clearing the roughly 35 dB target the paper reports, in about 157 seconds on the 4060 (the paper's own reference run is closer to an hour on a 5090, for a much larger training budget). A component ablation reproduces the paper's own Table 2 in direction, including its most specific and least obvious claim, that hashgrid encoding on its own, without denoising, is actually *worse* than plain auxiliary features on their own:
+Headline result at the paper's reference network size, 15,000 iterations on the Cornell box: mean tonemapped PSNR 38.62 dB, median 35.86 dB, mean SMAPE 0.097, clearing the roughly 35 dB target the paper reports, in about 157 seconds on the 4060 (the paper's own reference run is closer to an hour on a 5090, for a much larger training budget). A component ablation reproduces the paper's own Table 2 in direction, including its most specific and least obvious claim, that hashgrid encoding on its own, without denoising, is actually _worse_ than plain auxiliary features on their own:
 
-| Config | SMAPE | mean tonemapped PSNR |
-|---|---|---|
-| None (aux off, hashgrid off, denoise off) | 0.169 | 38.08 dB |
-| Aux only | 0.153 | 35.17 dB |
-| Aux + hashgrid, no denoise | 0.199 | 35.34 dB |
-| Aux + denoise | 0.082 | 35.78 dB |
-| Full (aux + hashgrid + denoise) | 0.078 | 36.02 dB |
+| Config                                    | SMAPE | mean tonemapped PSNR |
+| ----------------------------------------- | ----- | -------------------- |
+| None (aux off, hashgrid off, denoise off) | 0.169 | 38.08 dB             |
+| Aux only                                  | 0.153 | 35.17 dB             |
+| Aux + hashgrid, no denoise                | 0.199 | 35.34 dB             |
+| Aux + denoise                             | 0.082 | 35.78 dB             |
+| Full (aux + hashgrid + denoise)           | 0.078 | 36.02 dB             |
 
 The hashgrid needs clean, denoised targets to actually pay off, on noisy targets it just gives the network more capacity to overfit noise. That's a genuinely counterintuitive result to land on independently and then see the paper had already found the same thing.
 
@@ -201,7 +201,7 @@ The paper's second half is differentiability, since the proxy is a plain MLP, gr
 
 Everything up to here ran in Mitsuba, deliberately, since a research prototype iterates faster outside a compiled renderer's build loop. Getting a real dump out of the Cycles fork was the first actual change to the renderer itself, on a branch off `blender-v5.2-release`.
 
-The first finding here was a pleasant surprise: no new kernel guard was needed at all. Tracing `use_direct_light`, the flag that gates all next-event estimation, back to its actual source showed it's driven entirely by whether the scene has any emitters. A scene with zero lights already behaves exactly like the light-agnostic pass this project needed, no toggle required. The only real work was building the *recording*, not disabling anything: a new pair of headers for the per-thread recorder, modeled directly on the existing OpenPGL path-guiding recorder that already stores a very similar tuple (position, direction, weight) for a different purpose, with hooks dropped into the surface and background shading code to append a record on every bounce.
+The first finding here was a pleasant surprise: no new kernel guard was needed at all. Tracing `use_direct_light`, the flag that gates all next-event estimation, back to its actual source showed it's driven entirely by whether the scene has any emitters. A scene with zero lights already behaves exactly like the light-agnostic pass this project needed, no toggle required. The only real work was building the _recording_, not disabling anything: a new pair of headers for the per-thread recorder, modeled directly on the existing OpenPGL path-guiding recorder that already stores a very similar tuple (position, direction, weight) for a different purpose, with hooks dropped into the surface and background shading code to append a record on every bounce.
 
 Three real bugs surfaced here, and all three only showed up by actually building and running the fork, none of them were catchable by reading the diff:
 
@@ -215,12 +215,12 @@ Once those were fixed, the same unbiasedness protocol from the Mitsuba stage, PS
 
 This is the stage that actually tests the claim the whole project was built around: that because the dump and the ground truth both come from the same renderer, training should transfer cleanly regardless of which renderer produced the dump. And it did, with zero changes to the training code itself, just pointing it at a Cycles dump instead of a Mitsuba one.
 
-| Scene / renderer | median tonemapped PSNR | mean SMAPE |
-|---|---|---|
-| Cornell box, Mitsuba | 35.86 dB | 0.078 |
-| Bedroom, Cycles | 38.70 dB | 0.0751 |
-| Native room, Cycles | 37.80 dB | 0.0904 |
-| Bedroom, Mitsuba (cross-check) | 35.68 dB | 0.0985 |
+| Scene / renderer               | median tonemapped PSNR | mean SMAPE |
+| ------------------------------ | ---------------------- | ---------- |
+| Cornell box, Mitsuba           | 35.86 dB               | 0.078      |
+| Bedroom, Cycles                | 38.70 dB               | 0.0751     |
+| Native room, Cycles            | 37.80 dB               | 0.0904     |
+| Bedroom, Mitsuba (cross-check) | 35.68 dB               | 0.0985     |
 
 Two real bugs got caught here, both found after the fact while investigating why numbers looked off, and both worth describing because they're the kind that produce plausible-looking but wrong output rather than an obvious crash.
 
@@ -296,31 +296,27 @@ The addon does exactly one thing: live virtual-light relighting through the side
 
 Pulling every number above into one place:
 
-| Stage | What it measured | Result |
-|---|---|---|
-| Decoupling validity (Mitsuba) | PSNR vs spp, Cornell | 33.48 -> 49.99 dB, spp 4 -> 256, no bias plateau |
-| Decoupling validity (Mitsuba) | Per-light linearity error | 7.6e-6 |
-| Network training | Mean / median tonemapped PSNR, Cornell | 38.62 / 35.86 dB |
-| Network training | Mean SMAPE, Cornell | 0.097 |
-| Network training | Ablation, full config vs none | 0.078 vs 0.169 SMAPE |
-| Cycles dump validity | PSNR vs spp | 7.75 -> 21.73 dB, spp 4 -> 64 |
-| Cycles dump validity | Per-light linearity error | 2.4e-7 |
-| Cross-renderer training | Bedroom, Cycles | 38.70 dB / 0.0751 SMAPE |
-| Cross-renderer training | Native room, Cycles | 37.80 dB / 0.0904 SMAPE |
-| Addon end-to-end | NRP live preview vs calibrated F12 | 25.48 dB / 0.2918 SMAPE |
+| Stage                         | What it measured                       | Result                                           |
+| ----------------------------- | -------------------------------------- | ------------------------------------------------ |
+| Decoupling validity (Mitsuba) | PSNR vs spp, Cornell                   | 33.48 -> 49.99 dB, spp 4 -> 256, no bias plateau |
+| Decoupling validity (Mitsuba) | Per-light linearity error              | 7.6e-6                                           |
+| Network training              | Mean / median tonemapped PSNR, Cornell | 38.62 / 35.86 dB                                 |
+| Network training              | Mean SMAPE, Cornell                    | 0.097                                            |
+| Network training              | Ablation, full config vs none          | 0.078 vs 0.169 SMAPE                             |
+| Cycles dump validity          | PSNR vs spp                            | 7.75 -> 21.73 dB, spp 4 -> 64                    |
+| Cycles dump validity          | Per-light linearity error              | 2.4e-7                                           |
+| Cross-renderer training       | Bedroom, Cycles                        | 38.70 dB / 0.0751 SMAPE                          |
+| Cross-renderer training       | Native room, Cycles                    | 37.80 dB / 0.0904 SMAPE                          |
+| Addon end-to-end              | NRP live preview vs calibrated F12     | 25.48 dB / 0.2918 SMAPE                          |
 
 ## What's still rough
 
 A few things worth stating plainly rather than smoothing over. The point-light shape mismatch described above is real and unfixed, the addon compares favorably against its own training target but not perfectly against Blender's native lights, because those two light representations genuinely aren't the same shape. The path dump format currently stores plain float32 rather than the paper's memory-optimized packing (half-precision positions, compact shared-exponent color for throughput), a deliberate call to get the pipeline validated first before spending time on a compression scheme. The live preview writes into a plain Image datablock rather than a GPU texture draw handler in the viewport itself, which is a scope cut, not a technical dead end, swapping the display backend later doesn't touch the socket client, the light gathering code, or the update throttling, it's genuinely isolated. And nothing here has been pushed past the resolutions covered in this writeup, scaling further on 8 GB of VRAM is untested and would need its own pass.
 
-## Closing thoughts
-
-This project taught me a lot about how network training is actually supposed to be done, past what any tutorial covers, and also about writing a Blender plugin for the first time, and how straightforward it turned out to be to build tools for Blender. Beyond that, what stuck with me most wasn't the headline PSNR numbers, it was how many of the real bugs had nothing to do with the neural network at all. A circular header include. A const-qualified pointer. A render scheduler splitting work into batches in a way nothing in the paper could have warned about. A vertical flip between two conventions for what counts as row zero. None of that is neural-rendering-specific, it's just what happens when you actually build the thing instead of reading about it, and it's also exactly the part a paper can't tell you, because the paper is describing the idea that worked, not the fifteen small things that had to be fixed first for it to work.
-
 ## Acknowledgements
 
-None of this exists without the paper it's built on. Thanks to Sergio Sancho, Alexander Rath, Marco Manzi, Pascal Chang, Amit Bermano, Derek Nowrouzezahrai, Markus Gross, and Marios Papas for *Neural Render Proxies for Interactive and Differentiable Lighting*[^1], a clearly written paper that left enough of the right detail in to make a from-scratch reimplementation possible with no official code to check against. And thanks to Benedikt Bitterli for maintaining his rendering resources page[^2], the Cornell box, bedroom, and every other scene used through this project's validation stages came from there.
+None of this exists without the paper it's built on. Thanks to Sergio Sancho, Alexander Rath, Marco Manzi, Pascal Chang, Amit Bermano, Derek Nowrouzezahrai, Markus Gross, and Marios Papas for _Neural Render Proxies for Interactive and Differentiable Lighting_[^1], a clearly written paper that left enough of the right detail in to make a from-scratch reimplementation possible with no official code to check against. And thanks to Benedikt Bitterli for maintaining his rendering resources page[^2], the Cornell box, bedroom, and every other scene used through this project's validation stages came from there.
 
-[^1]: Sergio Sancho, Alexander Rath, Marco Manzi, Pascal Chang, Amit H. Bermano, Derek Nowrouzezahrai, Markus Gross, and Marios Papas, "Neural Render Proxies for Interactive and Differentiable Lighting," *Computer Graphics Forum* 45, no. 4 (2026), Eurographics Symposium on Rendering 2026.
+[^1]: Sergio Sancho, Alexander Rath, Marco Manzi, Pascal Chang, Amit H. Bermano, Derek Nowrouzezahrai, Markus Gross, and Marios Papas, "Neural Render Proxies for Interactive and Differentiable Lighting," _Computer Graphics Forum_ 45, no. 4 (2026), Eurographics Symposium on Rendering 2026.
 
-[^2]: Benedikt Bitterli, *Rendering resources*, 2016, https://benedikt-bitterli.me/resources/
+[^2]: Benedikt Bitterli, _Rendering resources_, 2016, https://benedikt-bitterli.me/resources/
