@@ -198,25 +198,6 @@
   }
 }
 
-/* Screenshots grid */
-.valley-screenshots {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-
-  img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    border: 1px solid var(--rule-soft);
-    display: block;
-
-    &:hover {
-      border-color: var(--accent-2);
-    }
-  }
-}
-
 /* Devlog section */
 .valley-devlog-header {
   display: flex;
@@ -230,10 +211,6 @@
   .valley-about-grid {
     grid-template-columns: 1fr;
     gap: 32px;
-  }
-
-  .valley-screenshots {
-    grid-template-columns: 1fr;
   }
 }
 

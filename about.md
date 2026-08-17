@@ -21,8 +21,6 @@ This site is a public notebook. I write about what I'm building, what I'm readin
 
 **[Essays](/essays)** are the longer pieces: technical write-ups, recaps. Edited when they feel done enough.
 
-**[Notes](/notes)** are the working layer: half-formed ideas and observations that evolve over time.
-
 **[Projects](/projects)** are things I've built. Mostly tools and research code.
 
 **[Bookshelf](/bookshelf)** is what I'm reading or have read, with brief notes.

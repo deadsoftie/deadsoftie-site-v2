@@ -6,4 +6,6 @@ summary: >
   A desktop management sim, built in C++ with raylib. Shipped on Steam, then
   ported to iPad and iPhone with touch controls and an in-game keyboard.
 stack: [c++, raylib]
+image: /assets/images/valley-chief-blog-banner.png
+order: 2
 ---

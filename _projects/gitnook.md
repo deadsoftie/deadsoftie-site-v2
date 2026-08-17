@@ -8,4 +8,5 @@ summary: >
 stack: [rust, libgit2]
 github: https://github.com/deadsoftie/gitnook
 featured: true
+order: 3
 ---

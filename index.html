@@ -38,6 +38,20 @@ title: deadsoftie
   </div>
   {% endif %}
 
+  <hr class="hr" style="margin: 40px 0">
+
+  <div class="eyebrow" style="margin-bottom: 8px">Projects</div>
+  <div class="projects-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px">
+    {% assign featured_projects = site.projects | sort: "order" %}
+    {% for project in featured_projects limit: 4 %}
+    {% include project-card.html project=project %}
+    {% endfor %}
+  </div>
+
+  <div style="padding: 16px 0; text-align: center">
+    <a href="{{ '/projects' | relative_url }}" style="font-size: 13px; color: var(--muted)">all {{ site.projects.size }} projects →</a>
+  </div>
+
   {% if site.data.now %}
   <p style="margin-top: 56px; font-size: 13px; color: var(--muted)">
     Currently reading {{ site.data.now.reading | first | remove: "." }} · {{ site.data.now.location | split: "." | first }}

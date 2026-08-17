@@ -1,0 +1,230 @@
+/* Quire - local-first LaTeX editor landing page. */
+
+.quire-hero {
+  padding: 64px 0 0;
+}
+
+.quire-sheet {
+  position: relative;
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  padding: 48px 52px 44px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* A quire is a set of folded sheets - these two offset hairlines behind the card read as gathered pages underneath, not a decorative shadow. */
+.quire-sheet::before,
+.quire-sheet::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 0;
+  height: 100%;
+  border: 1px solid var(--rule-soft);
+  z-index: -1;
+}
+.quire-sheet::before {
+  transform: translate(6px, 6px);
+}
+.quire-sheet::after {
+  transform: translate(12px, 12px);
+  opacity: 0.6;
+}
+
+.quire-title {
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: clamp(44px, 6vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+
+  .dot {
+    color: var(--accent);
+  }
+}
+
+.quire-tagline {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--fg-dim);
+  max-width: 540px;
+  margin: 0 0 6px;
+}
+
+/* A live proofreader's correction in the tagline copy, not a decorative squiggle. */
+.quire-strike {
+  position: relative;
+  color: var(--muted-2);
+}
+.quire-strike::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: 52%;
+  height: 1.5px;
+  background: var(--accent);
+  transform: rotate(-5deg);
+}
+.quire-insert {
+  color: var(--accent);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.quire-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.quire-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  padding: 6px 12px;
+  border: 1px solid var(--rule);
+  color: var(--fg-dim);
+}
+.quire-badge .dot {
+  background: var(--ok);
+}
+
+.quire-section-rule {
+  border: 0;
+  border-top: 2px solid var(--rule-soft);
+  margin: 0;
+}
+
+.quire-about-grid {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 56px;
+  align-items: start;
+}
+
+.quire-facts {
+  border: 1px solid var(--rule-soft);
+  background: var(--bg-elev);
+  padding: 20px 22px;
+
+  .quire-fact {
+    display: grid;
+    gap: 3px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--rule-soft);
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .fact-key {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .fact-val {
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--fg);
+  }
+}
+
+@media (max-width: 860px) {
+  .quire-about-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .quire-sheet {
+    padding: 36px 24px 32px;
+  }
+}
+
+/* Screenshots carousel */
+.quire-carousel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--rule-soft);
+  margin-bottom: 14px;
+
+  &:hover .quire-carousel-btn {
+    opacity: 1;
+  }
+}
+
+.quire-carousel-track {
+  display: flex;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  img {
+    width: 100%;
+    flex-shrink: 0;
+    display: block;
+    object-fit: cover;
+  }
+}
+
+.quire-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--bg);
+  border: 1px solid var(--rule-soft);
+  color: var(--fg);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.2s;
+
+  &.quire-carousel-prev {
+    left: 12px;
+  }
+
+  &.quire-carousel-next {
+    right: 12px;
+  }
+}
+
+.quire-carousel-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+
+  button {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 0;
+    background: color-mix(in srgb, #fff 45%, transparent);
+    cursor: pointer;
+    padding: 0;
+
+    &.active {
+      background: #fff;
+    }
+  }
+}
